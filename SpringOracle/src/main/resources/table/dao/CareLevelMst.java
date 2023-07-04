@@ -3,7 +3,7 @@ package com.example.springoracle.Model;
 import lombok.Data;
 
 @Data
-public class CareLevel {
+public class CareLevelMst {
 	
 	private String carelevelno;
 	
