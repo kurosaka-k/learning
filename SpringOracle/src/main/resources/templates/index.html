@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>sample</title>
 </head>
 <body>
-
+	<table>
+		<tr>
+			<th>carelevelno</th>
+			<th>clName</th>
+		</tr>
+		<tr th:each="list : ${clList}">
+			<td th:text="${list.careLevelNo}"></td>
+			<td th:text="${list.clName}"></td>
+		</tr>
+	</table>
 </body>
 </html>
