@@ -1,4 +1,4 @@
-package com.example.springoracle.app.sample;
+package com.example.springoracle.app.sample.repository;
 
 import java.util.List;
 

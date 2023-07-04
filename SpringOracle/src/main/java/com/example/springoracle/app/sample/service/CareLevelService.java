@@ -1,10 +1,11 @@
-package com.example.springoracle.app.sample;
+package com.example.springoracle.app.sample.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.springoracle.app.sample.repository.CareLevelMstRepository;
 import com.example.springoracle.table.entity.CareLevelMst;
 
 @Service

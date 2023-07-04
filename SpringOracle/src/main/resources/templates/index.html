@@ -15,5 +15,9 @@
 			<td th:text="${list.clName}"></td>
 		</tr>
 	</table>
+	<select th:field="${clList}">
+		<option value=""></option>
+		<option th:each="list : ${clList}" th:value="${list.careLevelNo}" th:text="${list.clName}" ></option>
+	</select>
 </body>
 </html>

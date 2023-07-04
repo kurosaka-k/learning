@@ -1,0 +1,103 @@
+/*@charset "UTF-8";*/
+body{
+	margin: 0px;
+	padding: 0px;
+}
+.header{
+	display: flex;
+	margin: 10px;
+	justify-content: space-between;
+}
+.header div{
+	width:auto;
+	padding:10px;
+}
+
+.header button{
+	width: 100px;
+	height: 30px;
+	margin-top: 50px;
+/*	background-color: aqua;*/
+}
+.heading{
+	border: solid 1px  black;
+	border-radius:10px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.search-box{
+	width: fit-content;
+	margin: 10px;
+	border: solid 1px black;
+	
+}
+.search{
+	display: flex;
+	padding: 10px;
+}
+.search-name input{
+	width:80px
+}
+
+label{
+	border:solid 1px deepskyblue;
+	min-width: 40px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+/*	margin-left: 5px;*/
+}
+input{
+	margin-right: 10px;
+}
+.search-home *{ 
+	width: 100px;
+	height: 50px;
+}
+.search-home label{
+	padding: 12.5px;
+}
+.search-home input{
+	min-width: 400px;
+	height: 45px;
+}
+.search-item{
+/*	border: solid 1px black;*/
+	margin-right: 10px;
+}
+.search-item input{
+	width: 100px;
+}
+.search-carelevel{
+	display: flex;
+}
+.search-charge{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.search-moni{
+	display: flex;
+}
+.search-tools{
+	border: solid 1px black;
+}
+.search-tools label{
+	border: none;
+	padding: 0px;
+}
+.btn{
+	text-align: right;
+	margin:10px;
+}
+.result{
+	padding: 10px;
+}
+table{
+	width: 100%;
+	border-collapse: collapse;
+	border: solid 1px black;
+}
+table th,td{
+	border-right: solid 1px black;
+	border-bottom: solid 1px black;
+}
