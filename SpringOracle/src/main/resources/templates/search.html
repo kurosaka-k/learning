@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="../static/base.css">
+<link rel="stylesheet" th:href="@{base.css}">
 <title>earch</title>
 </head>
 <body>
@@ -70,7 +70,7 @@
 				</div>
 				<div class="search-moni">
 					<label>モニタリング月</label><select th:field="${form.moniY}">
-						<option>2016年</option>
+						<option value="2016">2016年</option>
 					</select><select th:field="${form.moniM}">
 						<option th:value="1">1月</option>
 						<option th:value="2">2月</option>
@@ -106,7 +106,7 @@
 		</div>
 		<div class="btn">
 		<button>検索</button>			
-		</div class="btn">			
+		</div>			
 		</form>
 	</div>
 	
@@ -127,10 +127,10 @@
 			<tbody>
 				<span th:each="result : ${resultList}">
 					<tr>
-						<td th:text="${result.userName}">更新　智子</td>
+						<td th:text="${result.uName}">更新　智子</td>
 						<td th:text="${result.age}">40</td>
 						<td th:text="${result.clName}">要介護1</td>
-						<td th:text="${result.houseaddres}">大阪市</td>
+						<td th:text="${result.houseaddress}">大阪市</td>
 						<td th:text="${result.wtName}">歩行補助杖</td>
 						<td th:text="${result.cName}">松下　花子</td>
 						<td th:text="${result.moniMonths}">2017/12</td>
