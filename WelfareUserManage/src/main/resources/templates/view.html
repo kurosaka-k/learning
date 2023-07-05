@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>test</title>
+</head>
+<body>
+<select th:field="${regionList}">
+		<option value=""></option>
+		<option th:each="list : ${regionList}" th:value="${list.regionCode}" th:text="${list.rName}" ></option>
+	</select>
+</body>
+</html>
