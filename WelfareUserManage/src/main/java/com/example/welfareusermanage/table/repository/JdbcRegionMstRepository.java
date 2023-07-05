@@ -1,9 +1,11 @@
-package com.example.welfareusermanage.test;
+package com.example.welfareusermanage.table.repository;
 
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.example.welfareusermanage.table.entity.RegionMst;
 @Repository
 public class JdbcRegionMstRepository implements RegionMstRepository{
 

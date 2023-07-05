@@ -22,6 +22,8 @@ public class searchController {
 		searchForm form = new searchForm();
 		model.addAttribute("form",form);
 		
+		
+		
 		logger.info("検索画面　初期表示　終了");
 		return "search";
 	}

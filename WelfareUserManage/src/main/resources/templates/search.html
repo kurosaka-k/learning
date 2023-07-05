@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" th:href="@{/css/base.css}">
+<!--<script type="text/javascript" th:src="@{/js/selectvalue.js}" th:inline="javascript"></script>-->
+<script th:inline="javascript">
+	const cityList = /*[[${cityList}]]*/
+
+window.addEventListener('DOMContentLoaded',function(){
+	    let	select_region = document.querySelector("select[name=region]");
+		
+		city = document.getElementById("cityCode");
+		city.options.length = 0;
+		for(let i = 0;i < cityList.length;i++){
+			if(cityList[i].regionCode == select_region.value){				
+				var op = document.createElement("option");
+				op.value = cityList[i].cityCode;
+				op.text = cityList[i].cname;
+				city.appendChild(op);
+			}
+		}
+		
+	select_region.addEventListener('change',function(){
+		
+		city = document.getElementById("cityCode");
+		city.options.length = 0;
+		for(let i = 0;i < cityList.length;i++){
+			if(cityList[i].regionCode == select_region.value){
+				var op = document.createElement("option");
+				op.value = cityList[i].cityCode;
+				op.text = cityList[i].cname;
+				city.appendChild(op);
+			}
+		}
+	});
+	
+	var AGEMIN = 40;
+	var AGEMAX = 120;
+	var agefrom = document.getElementById("ageFrom");
+	var ageto = document.getElementById("ageTo");
+	for(let i = AGEMIN;i<=AGEMAX;i++){
+		var op = document.createElement("option");
+		op.value = i;
+		op.text = i;
+		var op2 = document.createElement("option");
+		op2.value = i;
+		op2.text = i;
+		agefrom.appendChild(op);
+		ageto.appendChild(op2);
+	}
+	
+	var today = new Date();
+	this_year = today.getFullYear();
+	var startyear = 2014;
+	for(i=startyear;i<=this_year;i++){
+		var op = document.createElement("option");
+		op.value = i;
+		op.text = i+"年";
+		document.getElementById("moniY").appendChild(op);
+	}
+	
+});
+</script>
+<title>earch</title>
+</head>
+<body>
+	<header>
+		<div class="header">
+			<div><h2><span class="heading">検索画面</span></h2></div>
+			<button>新規登録</button>
+		</div>
+	</header>
+	<hr>
+	<div class="search-box">
+		<form method="post" th:action="@{/search/searching}" th:object="${form}">
+			
+		<div class="search">
+			<div class="search-name">		
+				<input th:field="${form.userId}" type="text" placeholder="IDコード">
+				<label>氏名</label><input th:field="${form.uName}" type="text">
+			</div>
+			<div class="search-age">
+				<label>年齢</label><select th:field="${form.ageFrom}">
+<!--					<option value="40">40</option>-->
+<!--					<option th:each="age : ${ageform}" th:field="${age.value}">41</option>-->
+				</select>
+				~
+				<select th:field="${form.ageTo}">
+<!--					<option value="40">40</option>-->
+<!--					<option th:each="age : ${ageform}" th:field="${age.value}">41</option>-->
+				</select>
+			</div>
+			<div calss="search-gender">
+				<label>性別</label><select th:field="${form.gender}">
+					<option value="1">男</option>
+					<option value="2">女</option>
+				</select>
+			</div>
+		</div>
+		<div class="search">
+			<div class="search-home">
+				<label>住所</label><select name="region">
+					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}">都道府県</option>
+				</select><select th:field="${form.cityCode}">
+<!--					<option th:each="city : ${cityList}" th:value="${city.cityCode}" th:text="${city.cName}">市区町村</option>-->
+				</select><input th:field="${form.house}" type="text" placeholder="住所" value=selectregion();>
+			</div>
+
+		</div>
+		<div class="search">
+			<div class="search-item">
+				<div class="search-carelevel">
+					<label>要介護度</label><select th:field="${form.careLevelFrom}">
+						<option th:value="01">要支援1</option>
+						<option th:value="02">要支援2</option>
+						<option th:value="03">要介護1</option>
+						<option th:value="04">要介護2</option>
+					</select>
+					~
+					<select th:field="${form.careLevelTo}">
+						<option th:value="05">要介護3</option>
+						<option th:value="06">要介護4</option>
+						<option th:value="07">要介護5</option>
+
+					</select>
+				</div>
+				<div class="search-charge">
+					<label>担当</label><input th:field="${form.cName}" type="text">
+				</div>
+				<div class="search-moni">
+					<label>モニタリング月</label><select th:field="${form.moniY}">
+<!--						<option value="2016">2016年</option>-->
+					</select><select th:field="${form.moniM}">
+						<option th:value="1">1月</option>
+						<option th:value="2">2月</option>
+						<option th:value="3">3月</option>
+						<option th:value="4">4月</option>
+						<option th:value="5">5月</option>
+						<option th:value="6">6月</option>
+						<option th:value="7">7月</option>
+						<option th:value="8">8月</option>
+						<option th:value="9">9月</option>
+						<option th:value="10">10月</option>
+						<option th:value="11">11月</option>
+						<option th:value="12">12月</option>
+					</select>
+				</div>
+			</div>
+			<label>福祉用具検索</label>
+			<div class="search-tools" th:field="${form.tools}">
+				<label>歩行補助杖<input th:field="${form.tools}" value="WT0001" type="checkbox"></label>
+					<label>歩行器<input type="checkbox"></label>
+					<label>手すり<input type="checkbox"></label>
+					<label>スロープ<input type="checkbox"></label>
+					<label>リフト<input type="checkbox"><br></label>
+					<label>車椅子<input type="checkbox"></label>
+					<label>車椅子付属品<input type="checkbox"></label>
+					<label>特殊寝具<input type="checkbox"></label>
+					<label>特殊寝具付属品<input type="checkbox"><br></label>
+					<label>床ずれ防止用具<input type="checkbox"></label>
+					<label>体位変換器<input type="checkbox"></label>
+					<label>徘徊感知機器<input type="checkbox"><br></label>
+					<label>自動排泄処理装置<input type="checkbox"></label>
+				</div>
+		</div>
+		<div class="btn">
+		<button>検索</button>			
+		</div>			
+		</form>
+	</div>
+	
+	<div class="result">
+		<h5>検索結果</h5>
+		<table>
+			<thead>
+				<tr>
+					<th>氏名</th>
+					<th>年齢</th>
+					<th>介護度</th>
+					<th>住所</th>
+					<th>福祉用具</th>
+					<th>担当</th>
+					<th>モニ月</th>
+				</tr>
+			</thead>
+			<tbody>
+				<span th:each="result : ${resultList}">
+					<tr>
+						<td th:text="${result.uName}">更新　智子</td>
+						<td th:text="${result.age}">40</td>
+						<td th:text="${result.clName}">要介護1</td>
+						<td th:text="${result.houseaddress}">大阪市</td>
+						<td th:text="${result.wtName}">歩行補助杖</td>
+						<td th:text="${result.cName}">松下　花子</td>
+						<td th:text="${result.moniMonths}">2017/12</td>
+					</tr>
+				</span>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

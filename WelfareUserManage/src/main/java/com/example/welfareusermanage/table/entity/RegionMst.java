@@ -1,4 +1,4 @@
-package com.example.welfareusermanage.test;
+package com.example.welfareusermanage.table.entity;
 
 import lombok.Data;
 
