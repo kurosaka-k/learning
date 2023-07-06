@@ -14,6 +14,8 @@ public class searchForm {
 	private Integer ageTo;
 //	性別
 	private String gender;
+//	都道府県コード
+	private String regionCode;
 //	市区町村コード
 	private String cityCode;
 //	住所
@@ -30,4 +32,5 @@ public class searchForm {
 	private String moniM;
 //	福祉用具（複数）
 	private String tools;
+	
 }

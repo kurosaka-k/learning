@@ -28,7 +28,7 @@ body{
 .search-box{
 	width: fit-content;
 	margin: 10px;
-	border: solid 1px black;
+	border: solid 1px orange;
 	
 }
 .search{
@@ -48,6 +48,7 @@ label{
 /*	margin-left: 5px;*/
 }
 input{
+	
 	margin-right: 10px;
 }
 .search-home *{ 
@@ -79,7 +80,8 @@ input{
 	display: flex;
 }
 .search-tools{
-	border: solid 1px black;
+	border: solid 1px greenyellow;
+	
 }
 .search-tools label{
 	border: none;
@@ -96,6 +98,9 @@ table{
 	width: 100%;
 	border-collapse: collapse;
 	border: solid 1px black;
+}
+table thead{
+	background-color: gold;
 }
 table th,td{
 	border-right: solid 1px black;
