@@ -8,8 +8,8 @@
 	<!--<script type="text/javascript" th:src="@{/js/selectvalue.js}" th:inline="javascript"></script>-->
 	<script th:inline="javascript">
 		const cityList = /*[[${cityList}]]*/
-
-			window.addEventListener('DOMContentLoaded', function () {
+		
+		window.addEventListener('DOMContentLoaded', function () {
 				let select_region = document.querySelector("select[name=regionCode]");
 
 				setCity(select_region);
@@ -26,7 +26,6 @@
 					op.text = i + "年";
 					document.getElementById("moniY").appendChild(op);
 				}
-
 			});
 		function setCity(select_region) {
 			city = document.getElementById("cityCode");
@@ -44,7 +43,6 @@
 				}
 			}
 		}
-
 	</script>
 	<title>register</title>
 </head>
@@ -56,20 +54,21 @@
 				<h2><span class="heading">新規登録画面</span></h2>
 			</div>
 			<form th:action="@{/search}">
-				<button>検索</button>				
+				<button>検索</button>
 			</form>
 		</div>
 	</header>
 	<hr>
 	<div class="search-box">
-		<form method="post" th:action="@{/search/searching}" th:object="${form}">
+		<form method="post" th:action="@{/register/registerCheck}" th:object="${form}">
 
 			<div class="search">
 				<div class="search-name">
 					<label>氏名</label><input th:field="${form.uName}" type="text">
 				</div>
 				<div class="search-birthday">
-					<label>生年月日</label><input th:field="${form.birthDate}" type="text">
+					<label>生年月日</label><input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d"
+						placeholder="yyyy-mm-dd">
 				</div>
 				<div calss="search-gender">
 					<label>性別</label><select th:field="${form.gender}">
@@ -79,15 +78,15 @@
 					</select>
 				</div>
 			</div>
-				<div class="search-home">
-					<label>住所</label><select name="regionCode">
-						<option value="">都道府県を選択</option>
-						<option th:each="region : ${regionList}" th:value="${region.regionCode}"
-							th:text="${region.rName}">都道府県</option>
-					</select><select th:field="${form.cityCode}">
-						<!--					<option th:each="city : ${cityList}" th:value="${city.cityCode}" th:text="${city.cName}">市区町村</option>-->
-					</select><input th:field="${form.house}" type="text" placeholder="住所" value=selectregion();>
-				</div>
+			<div class="search-home">
+				<label>住所</label><select name="regionCode">
+					<option value="">都道府県を選択</option>
+					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}">
+						都道府県</option>
+				</select><select th:field="${form.cityCode}">
+				</select><input th:field="${form.house}" type="text" placeholder="住所" value=selectregion();>
+			</div>
+
 			<div class="search">
 				<div class="search-item">
 					<div class="search-carelevel">
@@ -103,7 +102,10 @@
 						</select>
 					</div>
 					<div class="search-charge">
-						<label>担当</label><input  type="text">
+						<label>担当</label><input th:field="${form.chargeId}" type="search" list="chargeList">
+						<datalist th:field="${chargeList}" id="chargeList">
+							<option th:each="charge : ${chargeList}"  th:value="${charge.cName+'('+charge.chargeId+')'}" th:text="${charge.cName}"></option>
+						</datalist> 
 					</div>
 					<div class="search-moni">
 						<label>モニタリング月</label><select th:field="${form.moniY}">
@@ -135,10 +137,10 @@
 					</span>
 				</div>
 			</div>
-			<div>
+			<div class="adl">
 				<label>ADL(日常生活動作）</label><input th:field="${form.adl}" type="text">
 			</div>
-			<div>
+			<div class="">
 				<label>居宅サービス事務所</label><input type="text">
 				<label>ケアマネ</label><input th:field="${form.careMgrId}" type="text">
 			</div>

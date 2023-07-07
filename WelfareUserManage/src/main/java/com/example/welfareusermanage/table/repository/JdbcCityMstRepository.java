@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.welfareusermanage.table.entity.CityMst;
+import com.example.welfareusermanage.table.repository.interfaces.CityMstRepository;
 
 @Repository
 public class JdbcCityMstRepository implements CityMstRepository{

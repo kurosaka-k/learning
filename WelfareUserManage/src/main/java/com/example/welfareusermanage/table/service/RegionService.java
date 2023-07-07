@@ -1,11 +1,11 @@
-package com.example.welfareusermanage.common.service;
+package com.example.welfareusermanage.table.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.example.welfareusermanage.table.entity.RegionMst;
-import com.example.welfareusermanage.table.repository.RegionMstRepository;
+import com.example.welfareusermanage.table.repository.interfaces.RegionMstRepository;
 
 @Service
 public class RegionService {

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.welfareusermanage.common.service.RegionService;
+import com.example.welfareusermanage.table.service.RegionService;
 
 @Controller
 @RequestMapping("/")

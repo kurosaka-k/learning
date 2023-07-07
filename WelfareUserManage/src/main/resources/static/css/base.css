@@ -83,8 +83,16 @@ input{
 	margin-top: 10px;
 	margin-bottom: 10px;
 }
+.search-charge input{
+	height: 50px;
+	width:200px;
+	
+}
 .search-moni{
 	display: flex;
+}
+.search-moni select{
+	width: 150px;
 }
 .search-tools{
 	border: solid 1px greenyellow;

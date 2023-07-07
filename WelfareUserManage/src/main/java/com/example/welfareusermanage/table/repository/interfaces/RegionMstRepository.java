@@ -1,4 +1,4 @@
-package com.example.welfareusermanage.table.repository;
+package com.example.welfareusermanage.table.repository.interfaces;
 
 import java.util.List;
 

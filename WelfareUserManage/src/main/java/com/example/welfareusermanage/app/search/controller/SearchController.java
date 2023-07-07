@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.welfareusermanage.app.search.entity.searchForm;
 import com.example.welfareusermanage.app.search.service.SearchResultService;
-import com.example.welfareusermanage.common.service.CityService;
-import com.example.welfareusermanage.common.service.RegionService;
-import com.example.welfareusermanage.common.service.WelfareToolService;
+import com.example.welfareusermanage.table.service.CityService;
+import com.example.welfareusermanage.table.service.RegionService;
+import com.example.welfareusermanage.table.service.WelfareToolService;
 
 @Controller
 @RequestMapping("/search")

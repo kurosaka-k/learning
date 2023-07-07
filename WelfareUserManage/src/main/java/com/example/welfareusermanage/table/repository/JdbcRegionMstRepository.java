@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.welfareusermanage.table.entity.RegionMst;
+import com.example.welfareusermanage.table.repository.interfaces.RegionMstRepository;
 @Repository
 public class JdbcRegionMstRepository implements RegionMstRepository{
 
