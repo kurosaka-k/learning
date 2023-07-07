@@ -29,11 +29,12 @@ body{
 	width: fit-content;
 	margin: 10px;
 	border: solid 1px orange;
-	
+	padding: 10px;
 }
 .search{
+	justify-content: space-around;
 	display: flex;
-	padding: 10px;
+	padding-bottom: 5px;
 }
 .search-name input{
 	width:80px
@@ -51,15 +52,21 @@ input{
 	
 	margin-right: 10px;
 }
+.search-home{
+	display: flex;
+	justify-content: space-around;
+	padding-bottom: 5px;
+}
 .search-home *{ 
-	width: 100px;
+	min-width: 120px;
 	height: 50px;
 }
 .search-home label{
-	padding: 12.5px;
+	line-height: 50px;
+	
 }
 .search-home input{
-	min-width: 400px;
+	min-width: 200px;
 	height: 45px;
 }
 .search-item{
