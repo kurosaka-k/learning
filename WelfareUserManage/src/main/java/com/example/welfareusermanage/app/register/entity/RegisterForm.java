@@ -23,7 +23,9 @@ public class RegisterForm {
 	private String careLevelNo;
 //	担当者ID
 	private String chargeId;
-//	ケアマネージャーID
+//	居宅サービス事務所No+名
+	private String homeSerOffice;
+//	ケアマネージャー名+ID
 	private String careMgrId;
 //	福祉用具(複数)
 	private String tools;

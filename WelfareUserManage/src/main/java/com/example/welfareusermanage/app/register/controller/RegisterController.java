@@ -12,8 +12,10 @@ import com.example.welfareusermanage.app.register.entity.RegisterForm;
 import com.example.welfareusermanage.app.register.service.RegisterFormService;
 import com.example.welfareusermanage.app.search.controller.SearchController;
 import com.example.welfareusermanage.common.service.RegionCityService;
+import com.example.welfareusermanage.table.service.CareMgrService;
 import com.example.welfareusermanage.table.service.ChargeService;
 import com.example.welfareusermanage.table.service.CityService;
+import com.example.welfareusermanage.table.service.HomeSerOfficeService;
 import com.example.welfareusermanage.table.service.RegionService;
 import com.example.welfareusermanage.table.service.WelfareToolService;
 
@@ -34,18 +36,26 @@ public class RegisterController {
 	
 	private ChargeService chargeservice;
 	
+	private HomeSerOfficeService homeserofficeservice;
+	
+	private CareMgrService caremgrservice;
+	
 	public RegisterController(RegionService regionservice,
 			CityService cityservice,
 			WelfareToolService welfaretoolservice,
 			RegionCityService regioncityservice,
 			RegisterFormService registerformservice,
-			ChargeService chargeservice) {
+			ChargeService chargeservice,
+			HomeSerOfficeService homeserofficeservice,
+			CareMgrService caremgrservice) {
 		this.regionservice = regionservice;
 		this.cityservice = cityservice;
 		this.welfaretoolservice = welfaretoolservice;
 		this.regioncityservice = regioncityservice;
 		this.registerformservice = registerformservice;
 		this.chargeservice = chargeservice;
+		this.homeserofficeservice = homeserofficeservice;
+		this.caremgrservice = caremgrservice;
 	}
 	
 	@RequestMapping("")
@@ -63,19 +73,23 @@ public class RegisterController {
 		
 		model.addAttribute("chargeList",chargeservice.readAll());
 		
+		model.addAttribute("officeList", homeserofficeservice.readAll());
+		
+		model.addAttribute("careMgrList", caremgrservice.readAll());
+		
 		logger.info("新規登録画面　初期表示　終了");
 		return "register";
 	}
 	
 	@RequestMapping("/registerCheck")
-	public String check(@Validated @ModelAttribute("form") RegisterForm form,Model model) {
-		logger.info("登録項目確認画面　表示　開始"+form);
+	public String check(@Validated @ModelAttribute("form") RegisterForm registerform,Model model) {
+		logger.info("登録項目確認画面　表示　開始"+registerform);
 		
-		model.addAttribute("form",form);
+		model.addAttribute("form",registerformservice.convert(registerform));
 		
 		model.addAttribute("regioncityList" ,regioncityservice.readAll());
 		
-		logger.info("登録項目確認画面　表示　終了");
+		logger.info("登録項目確認画面　表示　終了"+registerformservice.convert(registerform));
 		return "registerCheck";
 	}
 	

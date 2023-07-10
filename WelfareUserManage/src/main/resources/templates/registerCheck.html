@@ -14,7 +14,8 @@
 			var today = new Date();
 			
 			var age = today.getFullYear() - date.getFullYear();
-			if(today.getMonth()+1 < date.getMonth()+1 || (today.getMonth()+1 == date.getMonth()+1 && today.getDate() < date.getDate())){
+			if(today.getMonth()+1 < date.getMonth()+1 
+			|| (today.getMonth()+1 == date.getMonth()+1 && today.getDate() < date.getDate())){
 				age = age-1;
 			}
 			document.getElementById("age").innerHTML = age;
@@ -45,7 +46,7 @@
 					<label>生年月日</label><span th:text="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d" placeholder="yyyy-mm-dd">
 				</div>
 				<div class="age">
-					<label>年齢</label><span id="age"></span>
+					<label>年齢</label><span id="age" th:text="${form.age}"></span>
 				</div>
 				<div calss="search-gender">
 					<input hidden th:field="${form.gender}">
@@ -65,12 +66,11 @@
 					</div>
 					<div class="search-charge">
 						<input hidden th:field="${form.chargeId}">
-						<label>担当</label><span th:text="${form.chargeId}"></span>
+						<label>担当</label><span th:text="${form.cName}"></span>
 					</div>
 					<div class="search-moni">
-						<input hidden th:field="${form.moniY}">
-						<input hidden th:field="${form.moniM}">
-						<label>モニタリング月</label><span th:text="${form.moniY +'/'+ form.moniM}"></span>
+						<input hidden th:field="${form.moni}">
+						<label>モニタリング月</label><span th:text="${form.moni}"></span>
 					</div>
 				</div>
 				<label>福祉用具検索</label>
@@ -84,9 +84,10 @@
 				<label>ADL(日常生活動作）</label><span th:text="${form.adl}" type="text"></span>
 			</div>
 			<div class="">
-				<label>居宅サービス事務所</label><span></span>
+				<input hidden th:field="${form.homeSerOfficeNo}">
+				<label>居宅サービス事務所</label><span th:text="${form.oName}"></span>
 				<input hidden th:field="${form.careMgrId}">
-				<label>ケアマネ</label><span th:text="${form.careMgrId}" type="text"></span>
+				<label>ケアマネ</label><span th:text="${form.cmName}" type="text"></span>
 			</div>
 			<div class="btn">
 			この内容で間違いありませんか？良ければ登録ボタンを押してください。
