@@ -38,6 +38,22 @@ public class RegisterCheckForm {
 	private String toolsCode;
 	private String tools;
 	
+	public RegisterCheckForm(String uName,String birthDate,String gender,
+			String cityCode,String house,String adl,String moni,String careLevelNo,
+			String chargeId, String careMgrId,String toolsCode) {
+		this.uName = uName;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.cityCode = cityCode;
+		this.house = house;
+		this.adl = adl;
+		this.moni = moni;
+		this.careLevelNo = careLevelNo;
+		this.chargeId = chargeId;
+		this.careMgrId = careMgrId;
+		this.toolsCode = toolsCode;
+	}
+	
 	public RegisterCheckForm(RegisterForm form){
 		setUName(form.getUName());
 		setBirthDate(form.getBirthDate());

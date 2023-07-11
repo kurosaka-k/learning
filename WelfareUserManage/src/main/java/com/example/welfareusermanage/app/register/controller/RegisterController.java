@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.welfareusermanage.app.register.entity.InsertData;
 import com.example.welfareusermanage.app.register.entity.RegisterForm;
 import com.example.welfareusermanage.app.register.service.RegisterFormService;
 import com.example.welfareusermanage.app.search.controller.SearchController;
@@ -113,10 +114,10 @@ public class RegisterController {
 	}
 	
 	@RequestMapping("/create")
-	public String create(@Validated @ModelAttribute("form") RegisterForm form, Model model) {
+	public String create(InsertData form,Model model) {
 		logger.info("新規登録　処理　開始"+form);
 		
-		registerformservice.insert(form);
+//		registerformservice.insert(form);
 		
 		logger.info("新規登録　処理　終了");
 		return "forward:/";

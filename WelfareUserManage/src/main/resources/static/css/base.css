@@ -2,6 +2,7 @@
 body{
 	margin: 0px;
 	padding: 0px;
+	min-width: 700px;
 }
 .header{
 	display: flex;
@@ -12,7 +13,6 @@ body{
 	width:auto;
 	padding:10px;
 }
-
 .header button{
 	width: 100px;
 	height: 30px;
@@ -28,8 +28,8 @@ body{
 label{
 	border:solid 1px deepskyblue;
 	min-width: 40px;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
 	text-align: center;
 /*	margin-left: 5px;*/
 }
@@ -80,15 +80,15 @@ input{
 .search-carelevel{
 	display: flex;
 }
-.search-charge{
-	margin-top: 10px;
-	margin-bottom: 10px;
-}
-.search-charge input{
-	height: 50px;
-	width:200px;
+/*.search-charge{*/
+/*	margin-top: 10px;*/
+/*	margin-bottom: 10px;*/
+/*}*/
+/*.search-charge input{*/
+/*	height: 50px;*/
+/*	width:200px;*/
 	
-}
+/*}*/
 .search-moni{
 	display: flex;
 }
@@ -123,6 +123,54 @@ table th,td{
 	border-bottom: solid 1px black;
 }
 
+/*試し?*/
+.top-flexV{
+	border: solid 1px orange;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 10px;
+}
+.flexV {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.flexS{
+	display: flex;
+	margin-bottom: 10px;
+}
+.flexV div{
+	margin-bottom: 10px;
+}
+#flexV{
+	display: flex;
+	margin-bottom: 10px;
+}
+#moni label{
+	width: 80px;
+}
+#moni select{
+	min-width: 120px;
+}
+.tools{
+	border: solid 1px greenyellow;
+}
+.tools label{
+	border: none;
+	padding: 0px;
+}
+.tools span{
+	display: inline-block;
+}
+.adl {
+	align-items: center;
+}
+
+.adl textarea{
+	min-height: 100px;
+	width: 90%;
+}
 /*エラーメッセージ*/
 #vertical{
 	display: flex;

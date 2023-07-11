@@ -2,6 +2,7 @@ package com.example.welfareusermanage.app.register.service;
 
 import org.springframework.stereotype.Service;
 
+import com.example.welfareusermanage.app.register.entity.InsertData;
 import com.example.welfareusermanage.app.register.entity.RegisterCheckForm;
 import com.example.welfareusermanage.app.register.entity.RegisterForm;
 import com.example.welfareusermanage.app.register.repository.RegisterFormRepository;
@@ -18,7 +19,7 @@ public class RegisterFormService {
 		return rfRepository;
 	}
 	
-	public void insert(RegisterForm form) {
+	public void insert(InsertData form) {
 		getrfRepository().insert(form);
 	}
 	
