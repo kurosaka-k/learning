@@ -1,0 +1,9 @@
+<!-- エラーメッセージ -->
+<div th:fragment="errorMsg" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<div class="error form-group" th:if="${#fields.hasAnyErrors()}">
+		<div th:each="err : ${#fields.allErrors()}">
+			<label th:text="${err}">エラーが発生しました。</label>
+		</div>
+	</div>
+</div>

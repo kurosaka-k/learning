@@ -88,21 +88,26 @@
 	<hr>
 	<div class="search-box">
 		<form method="post" th:action="@{/register/registerCheck}" th:object="${form}">
-
 			<div class="search">
-				<div class="search-name">
-					<label>氏名</label><input th:field="${form.uName}" type="text">
+				<div class="search-name" id="vertical">
+											
+					<div><label>氏名</label><input th:field="${form.uName}" type="text"></div>
+					<label th:class="error" th:if="${#fields.hasErrors('uName')}" th:errors="${form.uName}"></label>
+					
 				</div>
-				<div class="search-birthday">
-					<label>生年月日</label><input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d"
-						placeholder="yyyy-mm-dd">
+				<div class="search-birthday" id="vertical">
+					<div><label>生年月日</label><input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d"
+						placeholder="yyyy-mm-dd"></div>
+					<label th:class="error" th:if="${#fields.hasErrors('birthDate')}" th:errors="${form.birthDate}"></label>
+
 				</div>
 				<div calss="search-gender">
-					<label>性別</label><select th:field="${form.gender}">
+					<div><label>性別</label><select th:field="${form.gender}">
 						<option value=""></option>
 						<option value="1">男</option>
 						<option value="2">女</option>
-					</select>
+					</select></div>
+					<label th:class="error" th:if="${#fields.hasErrors('gender')}" th:errors="${form.gender}"></label>
 				</div>
 			</div>
 			<div class="search-home">
@@ -111,7 +116,7 @@
 					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}">
 						都道府県</option>
 				</select><select th:field="${form.cityCode}">
-				</select><input th:field="${form.house}" type="text" placeholder="住所" value=selectregion();>
+				</select><input th:field="${form.house}" type="text" placeholder="住所">
 			</div>
 
 			<div class="search">

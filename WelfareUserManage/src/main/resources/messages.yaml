@@ -1,0 +1,19 @@
+#フィールド名
+uName: "氏名"
+birthData: "生年月日"
+gender: "性別"
+cityCode: "市区町村"
+house: "住所"
+careLevelNo: "要介護度"
+chargeId: "担当"
+moniY: "モニタリング年"
+moniM: "モニタリング月"
+tools: "福祉用具"
+adl: "ADL"
+homeSerOffice: "居宅サービス事務所"
+careMgrId: "ケアマネージャー"
+
+#Validationメッセージ
+NotEmpty:
+    message: "{0}を入力してください"
+

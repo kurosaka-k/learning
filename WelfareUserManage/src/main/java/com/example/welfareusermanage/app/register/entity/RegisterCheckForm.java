@@ -115,14 +115,14 @@ public class RegisterCheckForm {
 		
 	}
 	String itemCode(String str) {
-		int startPoint = str.indexOf("(");
+		int startPoint = str.indexOf("(")+1;
 		int endPoint = str.indexOf(")");
 		String item = str.substring(startPoint,endPoint);
 		return item;
 	}
 	String itemName(String str) {
 		int endPoint = str.indexOf("(");
-		String item = str.substring(endPoint);
+		String item = str.substring(0,endPoint);
 		return item;
 	}
 	public static int calcAge(Date birthday, Date now) {
