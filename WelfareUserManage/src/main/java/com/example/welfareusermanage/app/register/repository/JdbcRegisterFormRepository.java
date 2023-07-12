@@ -19,7 +19,7 @@ public class JdbcRegisterFormRepository implements RegisterFormRepository{
 	}
 	
 	@Override
-	public void insert(InsertData form) {
+	public String insert(InsertData form) {
 		// TODO 自動生成されたメソッド・スタブ
 		getJdbcTemplate().update(
 				"CALL INSERT_USER(?,?,?,?,?,?,?,?,?,?,?)",
@@ -28,6 +28,7 @@ public class JdbcRegisterFormRepository implements RegisterFormRepository{
 				,form.getMoni(),form.getCareLevelNo()
 				,form.getChargeId(),form.getCareMgrId(),form.getToolsCode()
 				);
+		return "";
 	}
 	
 }

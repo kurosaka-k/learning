@@ -72,10 +72,10 @@ function setCity(select_region){
 		</div>
 	</header>
 	<hr>
-	<div class="search-box">
+	<div class="top-flexV">
 		<form method="post" th:action="@{/search/searching}" th:object="${form}">
 			
-		<div class="search">
+		<div class="flexS">
 			<div class="search-name">		
 				<input th:field="${form.userId}" type="text" placeholder="IDコード">
 				<label>氏名</label><input th:field="${form.uName}" type="text">
@@ -107,13 +107,11 @@ function setCity(select_region){
 					<option value="">都道府県を選択</option>
 					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}">都道府県</option>
 				</select><select th:field="${form.cityCode}">
-<!--					<option th:each="city : ${cityList}" th:value="${city.cityCode}" th:text="${city.cName}">市区町村</option>-->
 				</select><input th:field="${form.house}" type="text" placeholder="住所" value=selectregion();>
 			</div>
-
 		</div>
-		<div class="search">
-			<div class="search-item">
+		<div class="flexS">
+			<div class="flexV">
 				<div class="search-carelevel">
 					<label>要介護度</label><select th:field="${form.careLevelFrom}">
 						<option value="">介護度の選択</option>
@@ -155,7 +153,7 @@ function setCity(select_region){
 				</div>
 			</div>
 			<label>福祉用具検索</label>
-			<div class="search-tools">
+			<div class="tools">
 				<span  th:each="tool : ${toolList}">
 					<label>				
 						[[ ${tool.wtName} ]]<input  th:field="${form.tools}" th:value="${tool.wtName}" type="checkbox"/>

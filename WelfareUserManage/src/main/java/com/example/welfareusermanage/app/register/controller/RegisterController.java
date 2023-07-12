@@ -117,9 +117,9 @@ public class RegisterController {
 	public String create(InsertData form,Model model) {
 		logger.info("新規登録　処理　開始"+form);
 		
-//		registerformservice.insert(form);
+		String userId = registerformservice.insert(form);
 		
 		logger.info("新規登録　処理　終了");
-		return "forward:/";
+		return "forward:/detailData";
 	}
 }

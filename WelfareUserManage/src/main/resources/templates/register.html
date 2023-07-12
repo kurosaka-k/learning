@@ -89,28 +89,27 @@
 	
 	<div class="top-flexV">
 		<form method="post" th:action="@{/register/registerCheck}" th:object="${form}">
-			<div class="flexS">
-				<div class="name" id="vertical">
-											
-					<div><label>氏名</label><input th:field="${form.uName}" type="text"></div>
 					<label th:class="error" th:if="${#fields.hasErrors('uName')}" th:errors="${form.uName}"></label>
-					
-				</div>
-				<div class="birthday" id="vertical">
-					<div><label>生年月日</label><input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d"
-						placeholder="yyyy-mm-dd"></div>
 					<label th:class="error" th:if="${#fields.hasErrors('birthDate')}" th:errors="${form.birthDate}"></label>
+					<label th:class="error" th:if="${#fields.hasErrors('gender')}" th:errors="${form.gender}"></label>
+			<div class="flexS">							
+					<div class="nowrap"><label>氏名</label><input th:field="${form.uName}" type="text"></div>
+
+				<div class="birthday" id="vertical">
+					<div class="nowrap"><label>生年月日</label><input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d"
+						placeholder="yyyy-mm-dd"></div>
 
 				</div>
 				<div calss="gender">
-					<div><label>性別</label><select th:field="${form.gender}">
+					<div class="nowrap"><label>性別</label><select th:field="${form.gender}">
 						<option value=""></option>
 						<option value="1">男</option>
 						<option value="2">女</option>
 					</select></div>
-					<label th:class="error" th:if="${#fields.hasErrors('gender')}" th:errors="${form.gender}"></label>
 				</div>
 			</div>
+				<label th:class="error" th:if="${#fields.hasErrors('cityCode')}" th:errors="${form.cityCode}"></label>
+				<label th:class="error" th:if="${#fields.hasErrors('house')}" th:errors="${form.house}"></label>
 			<div class="flexS">
 				<label>住所</label><select name="regionCode">
 					<option value="">都道府県を選択</option>
@@ -122,6 +121,7 @@
 
 			<div class="flexS">
 				<div class="flexV">
+						<label th:class="error" th:if="${#fields.hasErrors('careLevelNo')}" th:errors="${form.careLevelNo}"></label>
 					<div class="flexS" id="carelevel">
 						<label>要介護度</label><select th:field="${form.careLevelNo}">
 							<option value="">介護度の選択</option>
@@ -134,12 +134,15 @@
 							<option th:value="07">要介護5</option>
 						</select>
 					</div>
+						<label th:class="error" th:if="${#fields.hasErrors('chargeId')}" th:errors="${form.chargeId}"></label> 
 					<div class="flexS" id="charge">
 						<label>担当</label><input th:field="${form.chargeId}" type="search" list="chargeList">
 						<datalist th:field="${chargeList}" id="chargeList">
 							<option th:each="charge : ${chargeList}"  th:value="${charge.cName+'('+charge.chargeId+')'}"></option>
-						</datalist> 
+						</datalist>
 					</div>
+						<label th:class="error" th:if="${#fields.hasErrors('moniY')}" th:errors="${form.moniY}"></label>
+						<label th:class="error" th:if="${#fields.hasErrors('moniM')}" th:errors="${form.moniM}"></label>
 					<div class="flexS" id="moni">
 						<label>モニタリン</label><select th:field="${form.moniY}">
 							<option value=""></option>
@@ -168,13 +171,17 @@
 								[[ ${tool.wtName} ]]<input th:field="${form.tools}" th:value="${tool.wtName + '(' + tool.welfareToolNo + ')'}"
 									type="checkbox" />
 							</label>
-						</span>
+						</span><br>
+				<label th:class="error" th:if="${#fields.hasErrors('tools')}" th:errors="${form.tools}"></label>
 					</span>
 				</div>
 			</div>
+				<label th:class="error" th:if="${#fields.hasErrors('adl')}" th:errors="${form.adl}"></label>
 			<div class="adl" id="flexV">
 				<label>ADL(日常生活動作）</label><textarea th:field="${form.adl}"></textarea>
 			</div>
+			<label th:class="error" th:if="${#fields.hasErrors('homeSerOffice')}" th:errors="${form.homeSerOffice}"></label>
+			<label th:class="error" th:if="${#fields.hasErrors('careMgrId')}" th:errors="${form.careMgrId}"></label>
 			<div class="flexS">
 				<label>居宅サービス事務所</label><input th:field="${form.homeSerOffice}" type="search" id="officeNo" list="officeList">
 				<datalist th:field="${officeList}" id="officeList">

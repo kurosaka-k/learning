@@ -5,22 +5,6 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" th:href="@{/css/base.css}">
-	<!--<script type="text/javascript" th:src="@{/js/selectvalue.js}" th:inline="javascript"></script>-->
-	<script th:inline="javascript">
-		const birthday = /*[[${form.birthDate}]]*/
-		window.addEventListener('DOMContentLoaded', function () {
-			let date = new Date(birthday);
-			
-			var today = new Date();
-			
-			var age = today.getFullYear() - date.getFullYear();
-			if(today.getMonth()+1 < date.getMonth()+1 
-			|| (today.getMonth()+1 == date.getMonth()+1 && today.getDate() < date.getDate())){
-				age = age-1;
-			}
-			document.getElementById("age").innerHTML = age;
-		});
-	</script>
 	<title>registerCheck</title>
 </head>
 
@@ -33,10 +17,10 @@
 		</div>
 	</header>
 	<hr>
-	<div class="search-box">
+	<div class="top-flexV">
 		<form method="post" th:action="@{/register/create}" th:object="${form}">
 
-			<div class="search">
+			<div class="flexS">
 				<div class="search-name">
 					<input hidden th:field="${form.uName}">
 					<label>氏名</label><span th:text="${form.uName}"></span>
@@ -50,7 +34,11 @@
 				</div>
 				<div calss="search-gender">
 					<input hidden th:field="${form.gender}">
-					<label>性別</label><span th:text="${form.gender}"></span>
+					<label>性別</label><span th:switch="${form.gender}">
+						<span th:case=1>男</span>
+						<span th:case=2>女</span>	
+					</span>
+					
 				</div>
 			</div>
 				<div class="search-home" th:field="${regioncityList}">
@@ -58,11 +46,19 @@
 					<input hidden th:field="${form.house}">
 					<label>住所</label><span th:each="regioncity : ${regioncityList}" th:if="${regioncity.cityCode == form.cityCode}" th:text="${regioncity.rName + regioncity.cName + form.house}"></span>
 				</div>
-			<div class="search">
-				<div class="search-item">
+			<div class="flexS">
+				<div class="flexV">
 					<div class="search-carelevel">
 						<input hidden th:field="${form.careLevelNo}">
-						<label>要介護度</label><span th:text="${form.careLevelNo}"></span>
+						<label>要介護度</label><span th:switch="${form.careLevelNo}">
+							<span th:case=1>要支援1</span>
+							<span th:case=2>要支援2</span>
+							<span th:case=3>要介護1</span>
+							<span th:case=4>要介護2</span>
+							<span th:case=5>要介護3</span>
+							<span th:case=6>要介護4</span>
+							<span th:case=7>要介護5</span>
+						</span>
 					</div>
 					<div class="search-charge">
 						<input hidden th:field="${form.chargeId}">

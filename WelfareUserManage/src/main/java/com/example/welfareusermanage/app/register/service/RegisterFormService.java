@@ -19,8 +19,8 @@ public class RegisterFormService {
 		return rfRepository;
 	}
 	
-	public void insert(InsertData form) {
-		getrfRepository().insert(form);
+	public String insert(InsertData form) {
+		return getrfRepository().insert(form);
 	}
 	
 	public RegisterCheckForm convert(RegisterForm form) {

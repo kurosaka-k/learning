@@ -1,15 +1,16 @@
 package com.example.welfareusermanage.app.register.entity;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
 public class RegisterForm {
 //	利用者名
-	@NotEmpty
+	@NotBlank
 	private String uName;
 //	生年月日
-	@NotEmpty
+	@NotBlank
 	private String birthDate;
 //	性別
 	@NotEmpty
@@ -18,10 +19,10 @@ public class RegisterForm {
 	@NotEmpty
 	private String cityCode;
 //	住所
-	@NotEmpty
+	@NotBlank
 	private String house;
 //	ADL
-	@NotEmpty
+	@NotBlank
 	private String adl;
 //	モニタリング月
 	@NotEmpty
@@ -32,16 +33,15 @@ public class RegisterForm {
 	@NotEmpty
 	private String careLevelNo;
 //	担当者ID
-	@NotEmpty
+	@NotBlank
 	private String chargeId;
 //	居宅サービス事務所No+名
-	@NotEmpty
+	@NotBlank
 	private String homeSerOffice;
 //	ケアマネージャー名+ID
-	@NotEmpty
+	@NotBlank
 	private String careMgrId;
 //	福祉用具(複数)
 	@NotEmpty
 	private String tools;
-	
 }

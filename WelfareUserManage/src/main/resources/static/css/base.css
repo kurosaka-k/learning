@@ -147,6 +147,9 @@ table th,td{
 	display: flex;
 	margin-bottom: 10px;
 }
+.nowrap{
+	white-space: nowrap;
+}
 #moni label{
 	width: 80px;
 }
