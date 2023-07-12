@@ -71,7 +71,7 @@ public class JdbcSearchResultRepository implements SearchResultRepository{
 					item.setCName(resultSet.getString("c_name"));
 					item.setMoniMonths(resultSet.getString("MONI_MONTH"));
 					return item;
-		}
+				}
 				,form.getUserId(),form.getUserId()
 				,form.getGender(),form.getGender()
 				,form.getRegionCode(),form.getRegionCode()
@@ -83,7 +83,7 @@ public class JdbcSearchResultRepository implements SearchResultRepository{
 				,form.getCName(),form.getCName()
 				,form.getMoniY(),form.getMoniM(),form.getMoniY(),form.getMoniM()
 				,form.getTools(),form.getTools()
-				);
+			);
 	}
 	
 }

@@ -3,7 +3,7 @@ package com.example.welfareusermanage.app.detailData.entity;
 import lombok.Data;
 
 @Data
-public class detailDataForm {
+public class DetailDataForm {
 	
 	private String uName;
 	

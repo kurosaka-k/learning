@@ -30,6 +30,7 @@
 					setOption(city,cityList[i].cityCode,cityList[i].cname);
 				}
 			}
+			
 		}
 		
 		const careMgrList = /*[[${careMgrList}]]*/
@@ -51,7 +52,6 @@
 		window.addEventListener('DOMContentLoaded', function () {
 			let select_region = document.querySelector("select[name=regionCode]");
 
-			setCity(select_region);
 			select_region.addEventListener('change', function () {
 				setCity(select_region);
 			});
@@ -61,7 +61,7 @@
 			var START = 2014;
 			var doc = document.getElementById("moniY");
 			for (i = START; i <= this_year; i++) {
-				setOption(doc,i,i + "年");
+<!--				setOption(doc,i,i + "年");-->
 			}
 
 			let office = document.getElementById("officeNo");
@@ -78,11 +78,12 @@
 	<header>
 		<div class="header">
 			<div>
-				<h2><span class="heading">新規登録画面</span></h2>
+				<h2><span class="heading">更新画面</span></h2>
 			</div>
-			<form th:action="@{/search}">
-				<button>検索</button>
+			<form th:object="${form}" th:action="@{'/detailData/' + ${form.userId}}">
+				<button>詳細画面に戻る</button>				
 			</form>
+			
 		</div>
 	</header>
 	<hr>
@@ -111,11 +112,12 @@
 				<label th:class="error" th:if="${#fields.hasErrors('cityCode')}" th:errors="${form.cityCode}"></label>
 				<label th:class="error" th:if="${#fields.hasErrors('house')}" th:errors="${form.house}"></label>
 			<div class="flexS">
-				<label>住所</label><select name="regionCode">
+				<label>住所</label><select name="regionCode" >
 					<option value="">都道府県を選択</option>
-					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}">
+					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}" th:selected="${form.regionCode == region.regionCode}">
 						都道府県</option>
 				</select><select th:field="${form.cityCode}">
+					<option th:each="city : ${cityList}" th:if="${city.regionCode == form.regionCode}" th:value="${city.cityCode}" th:text="${city.cName}" th:selected="${form.cityCode == city.cityCode}"></option>
 				</select><input th:field="${form.house}" type="text" placeholder="住所">
 			</div>
 
@@ -134,9 +136,9 @@
 							<option th:value="07">要介護5</option>
 						</select>
 					</div>
-						<label th:class="error" th:if="${#fields.hasErrors('chargeId')}" th:errors="${form.chargeId}"></label> 
+						<label th:class="error" th:if="${#fields.hasErrors('charge')}" th:errors="${form.charge}"></label> 
 					<div class="flexS" id="charge">
-						<label>担当</label><input th:field="${form.chargeId}" type="search" list="chargeList">
+						<label>担当</label><input th:field="${form.charge}" type="search" list="chargeList">
 						<datalist th:field="${chargeList}" id="chargeList">
 							<option th:each="charge : ${chargeList}"  th:value="${charge.cName+'('+charge.chargeId+')'}"></option>
 						</datalist>
@@ -146,6 +148,7 @@
 					<div class="flexS" id="moni">
 						<label>モニタリン</label><select th:field="${form.moniY}">
 							<option value=""></option>
+							<option th:each="moniY : ${yearList}" th:value="${moniY.key}" th:text="${moniY.value}"></option>
 						</select><select th:field="${form.moniM}">
 							<option value=""></option>
 							<option th:value="1">1月</option>
@@ -169,7 +172,7 @@
 						<span id="tool" th:each="tool : ${toolList}">
 							<label>
 								[[ ${tool.wtName} ]]<input th:field="${form.tools}" th:value="${tool.wtName + '(' + tool.welfareToolNo + ')'}"
-									type="checkbox" />
+									type="checkbox" th:checked="${form.tools == tool.welfareToolNo}"/>
 							</label>
 						</span><br>
 				<label th:class="error" th:if="${#fields.hasErrors('tools')}" th:errors="${form.tools}"></label>
@@ -181,13 +184,13 @@
 				<label>ADL(日常生活動作）</label><textarea th:field="${form.adl}"></textarea>
 			</div>
 			<label th:class="error" th:if="${#fields.hasErrors('homeSerOffice')}" th:errors="${form.homeSerOffice}"></label>
-			<label th:class="error" th:if="${#fields.hasErrors('careMgrId')}" th:errors="${form.careMgrId}"></label>
+			<label th:class="error" th:if="${#fields.hasErrors('careMgr')}" th:errors="${form.careMgr}"></label>
 			<div class="flexS">
 				<label>居宅サービス事務所</label><input th:field="${form.homeSerOffice}" type="search" id="officeNo" list="officeList">
 				<datalist th:field="${officeList}" id="officeList">
 					<option th:each="office : ${officeList}" th:value="${office.oName + '(' + office.homeSerOfficeNo +')'}"></option>
 				</datalist>
-				<label>ケアマネ</label><input th:field="${form.careMgrId}" type="search" id="careMgr" list="careMgrList">
+				<label>ケアマネ</label><input th:field="${form.careMgr}" type="search" id="careMgr" list="careMgrList" >
 				<datalist th:field="${careMgrList}" id="careMgrList">
 					<option th:each="careMgr : ${careMgrList}" th:value="${careMgr.cmName + '(' + careMgr.careMgrId +')'}"></option>
 				</datalist>

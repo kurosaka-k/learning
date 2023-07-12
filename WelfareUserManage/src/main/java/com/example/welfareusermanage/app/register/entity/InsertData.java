@@ -20,9 +20,9 @@ public class InsertData {
 	private String moni;
 //	要介護度
 	private String careLevelNo;
-//	担当者名+ID
+//	担当者ID
 	private String chargeId;
-//	ケアマネージャー名+ID
+//	ケアマネージャーID
 	private String careMgrId;
 //	福祉用具No+名
 	private String toolsCode;

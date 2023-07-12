@@ -2,6 +2,7 @@ package com.example.welfareusermanage.app.register.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,40 +26,22 @@ import com.example.welfareusermanage.table.service.WelfareToolService;
 @RequestMapping("/register")
 public class RegisterController {
 	private static final Logger logger = LoggerFactory.getLogger(SearchController.class);
-
+	@Autowired
 	private RegionService regionservice;
-	
+	@Autowired
 	private CityService cityservice;
-	
+	@Autowired
 	private WelfareToolService welfaretoolservice;
-	
+	@Autowired
 	private RegionCityService regioncityservice;
-	
+	@Autowired
 	private RegisterFormService registerformservice;
-	
+	@Autowired
 	private ChargeService chargeservice;
-	
+	@Autowired
 	private HomeSerOfficeService homeserofficeservice;
-	
+	@Autowired
 	private CareMgrService caremgrservice;
-	
-	public RegisterController(RegionService regionservice,
-			CityService cityservice,
-			WelfareToolService welfaretoolservice,
-			RegionCityService regioncityservice,
-			RegisterFormService registerformservice,
-			ChargeService chargeservice,
-			HomeSerOfficeService homeserofficeservice,
-			CareMgrService caremgrservice) {
-		this.regionservice = regionservice;
-		this.cityservice = cityservice;
-		this.welfaretoolservice = welfaretoolservice;
-		this.regioncityservice = regioncityservice;
-		this.registerformservice = registerformservice;
-		this.chargeservice = chargeservice;
-		this.homeserofficeservice = homeserofficeservice;
-		this.caremgrservice = caremgrservice;
-	}
 	
 	@RequestMapping("")
 	public String init( Model model) {
@@ -119,7 +102,7 @@ public class RegisterController {
 		
 		String userId = registerformservice.insert(form);
 		
-		logger.info("新規登録　処理　終了");
-		return "forward:/detailData";
+		logger.info("新規登録　処理　終了"+userId);
+		return "forward:/detailData/"+userId;
 	}
 }
