@@ -35,7 +35,7 @@ public class ChangeForm {
 	private String moniM;
 //	要介護度
 	@NotEmpty
-	private Integer careLevelNo;
+	private String careLevelNo;
 //	担当者名+ID
 	@NotBlank
 	private String charge;
@@ -48,4 +48,11 @@ public class ChangeForm {
 //	福祉用具(複数)
 	@NotEmpty
 	private String tools;
+	
+	public void setCareLevelNo(Integer careLevelNo) {
+		this.careLevelNo = String.valueOf(careLevelNo);
+	}
+	public void setCareLevelNo(String careLevelNo) {
+		this.careLevelNo = careLevelNo;
+	}
 }

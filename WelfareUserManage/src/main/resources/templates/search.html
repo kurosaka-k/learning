@@ -183,8 +183,10 @@ function setCity(select_region){
 			</thead>
 			<tbody>
 				<span th:each="result : ${resultList}">
-					<tr>
-						<td th:text="${result.uName}">更新　智子</td>
+					<tr>	
+						<td>
+							<a th:href="@{'/detailData/' + ${result.userId}}">[[ ${result.uName} ]]</a>
+						</td>							
 						<td th:text="${result.age}">40</td>
 						<td th:text="${result.clName}">要介護1</td>
 						<td th:text="${result.houseaddress}">大阪市</td>

@@ -89,11 +89,12 @@
 	<hr>
 	
 	<div class="top-flexV">
-		<form method="post" th:action="@{/register/registerCheck}" th:object="${form}">
+		<form method="post" th:action="@{/change/changeCheck}" th:object="${form}">
+			<input type="hidden" th:field="${form.userId}">
 					<label th:class="error" th:if="${#fields.hasErrors('uName')}" th:errors="${form.uName}"></label>
 					<label th:class="error" th:if="${#fields.hasErrors('birthDate')}" th:errors="${form.birthDate}"></label>
 					<label th:class="error" th:if="${#fields.hasErrors('gender')}" th:errors="${form.gender}"></label>
-			<div class="flexS">							
+			<div class="flexS">	
 					<div class="nowrap"><label>氏名</label><input th:field="${form.uName}" type="text"></div>
 
 				<div class="birthday" id="vertical">
@@ -172,7 +173,7 @@
 						<span id="tool" th:each="tool : ${toolList}">
 							<label>
 								[[ ${tool.wtName} ]]<input th:field="${form.tools}" th:value="${tool.wtName + '(' + tool.welfareToolNo + ')'}"
-									type="checkbox" th:checked="${form.tools == tool.welfareToolNo}"/>
+									type="checkbox"  th:checked="${form.tools == tool.wtName + '(' + tool.welfareToolNo + ')'}" />
 							</label>
 						</span><br>
 				<label th:class="error" th:if="${#fields.hasErrors('tools')}" th:errors="${form.tools}"></label>

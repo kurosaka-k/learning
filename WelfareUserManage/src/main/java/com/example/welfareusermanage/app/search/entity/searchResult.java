@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class searchResult {
+	private String userId;
 //	利用者名
 	private String uName;
 //	年齢

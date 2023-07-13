@@ -4,6 +4,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.welfareusermanage.app.change.entity.ChangeForm;
+import com.example.welfareusermanage.app.change.entity.UpdateData;
 
 @Repository
 public class JdbcChangeRepository implements ChangeRepository{
@@ -28,7 +29,7 @@ public class JdbcChangeRepository implements ChangeRepository{
 				+ "ADL,\n"
 				+ "CONCAT(cm_name,CONCAT('(',CONCAT(cmm.care_mgr_ID,')'))) AS \"care_mgr\",\n"
 				+ "CONCAT(o_name,CONCAT('(',CONCAT(hsom.home_ser_office_no,')'))) AS \"office\",\n"
-				+ "LISTAGG(WT_NAME,',') AS TOOLS\n"
+				+ "LISTAGG(concat(WT_NAME,concat('(',concat(wtm.welfare_tool_no,')'))),',') AS TOOLS\n"
 				+ "FROM USERS_TBL UT\n"
 				+ "LEFT JOIN CITY_MST CIM ON CIM.CITY_CODE = UT.CITY_CODE\n"
 				+ "LEFT JOIN REGION_MST RMS ON RMS.REGION_CODE = CIM.REGION_CODE\n"
@@ -70,6 +71,18 @@ public class JdbcChangeRepository implements ChangeRepository{
 					return item;
 				},userId);
 	}
-	
-	
+
+	@Override
+	public String update(UpdateData form) {
+		// TODO 自動生成されたメソッド・スタブ
+		String sql = "call UPDATE_USER(?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		getJdbcTemplate().update(sql,
+				form.getUserId(),form.getUName(),form.getBirthDate(),
+				form.getGender(),form.getCityCode(),form.getHouse(),
+				form.getAdl(),form.getMoni(),form.getCareLevelNo(),
+				form.getChargeId(),form.getCareMgrId(),form.getToolsCode()
+				);
+		return form.getUserId();
+	}
 }

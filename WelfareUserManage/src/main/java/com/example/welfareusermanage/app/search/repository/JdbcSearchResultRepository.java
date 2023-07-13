@@ -25,7 +25,7 @@ public class JdbcSearchResultRepository implements SearchResultRepository{
 	public List<searchResult> search(searchForm form) {
 		// TODO 自動生成されたメソッド・スタブ
 		String sql = "SELECT * FROM (\n"
-				+ "SELECT U_NAME,\n"
+				+ "SELECT ut.user_id,U_NAME,\n"
 				+ "EXTRACT(YEAR FROM SYSDATE)-EXTRACT(YEAR FROM UT.BIRTH_DATE)\n"
 				+ "-CASE WHEN\n"
 				+ "TO_CHAR(SYSDATE,'MM/DD')<TO_CHAR(UT.BIRTH_DATE,'MM/DD') THEN 1 ELSE 0\n"
@@ -48,7 +48,7 @@ public class JdbcSearchResultRepository implements SearchResultRepository{
 				+ "AND (? IS NULL OR cim.city_code LIKE CONCAT(?,'%'))\n"
 				+ "AND (? IS NULL OR HOUSE LIKE CONCAT(?,'%'))\n"
 				+ "AND (? IS NULL OR ? IS NULL OR clm.care_level_no BETWEEN concat('0',?) AND concat('0',?))\n"
-				+ "group by U_NAME, \n"
+				+ "group by ut.user_id,U_NAME, \n"
 				+ "EXTRACT(YEAR FROM SYSDATE) - EXTRACT(YEAR FROM UT.BIRTH_DATE) \n"
 				+ "- CASE WHEN TO_CHAR(SYSDATE,'MM/DD') < TO_CHAR(UT.BIRTH_DATE,'MM/DD') THEN 1 ELSE 0 END,\n"
 				+ "CL_NAME, CONCAT(CONCAT(R_NAME,cim.c_name),HOUSE), chm.c_name, MONI_MONTH\n"
@@ -63,6 +63,7 @@ public class JdbcSearchResultRepository implements SearchResultRepository{
 		return getJdbcTemplate().query(
 				sql,(resultSet,i) -> {
 					searchResult item = new searchResult();
+					item.setUserId(resultSet.getString("user_id"));
 					item.setUName(resultSet.getString("u_name"));
 					item.setAge(resultSet.getInt("age"));
 					item.setClName(resultSet.getString("cl_name"));

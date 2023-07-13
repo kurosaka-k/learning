@@ -1,4 +1,4 @@
-package com.example.welfareusermanage.app.register.entity;
+package com.example.welfareusermanage.app.change.entity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +7,8 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class RegisterCheckForm {
+public class ChangeCheckForm {
+	private String userId;
 //	利用者名
 	private String uName;
 //	生年月日
@@ -38,7 +39,9 @@ public class RegisterCheckForm {
 	private String toolsCode;
 	private String tools;
 	
-	public RegisterCheckForm(RegisterForm form){
+	
+	public ChangeCheckForm(ChangeForm form){
+		setUserId(form.getUserId());
 		setUName(form.getUName());
 		setBirthDate(form.getBirthDate());
 		setAge(form.getBirthDate());
@@ -48,12 +51,12 @@ public class RegisterCheckForm {
 		setAdl(form.getAdl());
 		setMoni(form.getMoniY() + "/" + form.getMoniM());
 		setCareLevelNo(form.getCareLevelNo());
-		setChargeId(form.getChargeId());
-		setCName(form.getChargeId());
+		setChargeId(form.getCharge());
+		setCName(form.getCharge());
 		setHomeSerOfficeNo(form.getHomeSerOffice());
 		setOName(form.getHomeSerOffice());
-		setCareMgrId(form.getCareMgrId());
-		setCmName(form.getCareMgrId());
+		setCareMgrId(form.getCareMgr());
+		setCmName(form.getCareMgr());
 		if(form.getTools().indexOf(",") == -1) {
 			setToolsCode(form.getTools());
 			setTools(form.getTools());
@@ -67,11 +70,7 @@ public class RegisterCheckForm {
 			
 	}
 	public void setCareLevelNo(String careLevelNo) {
-		if(careLevelNo.contains("0")) {
-			this.careLevelNo = careLevelNo;
-		}else {
-			this.careLevelNo = "0"+careLevelNo;
-		}
+		this.careLevelNo = "0"+careLevelNo;
 	}
 	public void setChargeId(String charge) {
 		this.chargeId = itemCode(charge);
@@ -135,5 +134,4 @@ public class RegisterCheckForm {
 	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	    return (Integer.parseInt(sdf.format(now)) - Integer.parseInt(sdf.format(birthday))) / 10000;
 	}
-	
 }
