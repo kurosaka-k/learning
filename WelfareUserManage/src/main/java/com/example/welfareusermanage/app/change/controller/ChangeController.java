@@ -1,5 +1,7 @@
 package com.example.welfareusermanage.app.change.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.welfareusermanage.app.change.entity.ChangeForm;
+import com.example.welfareusermanage.app.change.entity.ToolsChecked;
 import com.example.welfareusermanage.app.change.entity.UpdateData;
 import com.example.welfareusermanage.app.change.service.ChangeService;
 import com.example.welfareusermanage.app.search.controller.SearchController;
@@ -48,6 +51,17 @@ public class ChangeController {
 	@RequestMapping("/{userId}")
 	public String init(@PathVariable String userId,Model model) {
 		logger.info("更新画面　初期表示　開始");
+		
+		List<ToolsChecked> toolsList = welfaretoolservice.readchecked();
+		ChangeForm changeForm = changeservice.read(userId);
+		String[] toolArry = changeForm.getTools().split(",");
+		for(int i = 0; i < toolsList.size() ; i++) {
+			
+			for(String tools : toolArry) {
+				logger.info(""+tools);
+				
+			}
+		}
 		
 		model.addAttribute("yearList",changeservice.moniForm());
 		

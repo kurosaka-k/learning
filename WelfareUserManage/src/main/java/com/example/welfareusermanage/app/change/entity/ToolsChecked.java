@@ -8,5 +8,4 @@ import lombok.Data;
 public class ToolsChecked extends WelfareToolMst{
 	private String checkFlg; 
 	
-	
 }

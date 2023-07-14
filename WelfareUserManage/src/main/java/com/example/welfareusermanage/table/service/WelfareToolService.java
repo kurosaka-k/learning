@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.example.welfareusermanage.app.change.entity.ToolsChecked;
 import com.example.welfareusermanage.table.entity.WelfareToolMst;
 import com.example.welfareusermanage.table.repository.interfaces.WelfareToolMstRepository;
 
@@ -21,5 +22,9 @@ public class WelfareToolService {
 	
 	public List<WelfareToolMst> readAll(){
 		return getwtmRepository().find();
+	}
+	
+	public List<ToolsChecked> readchecked(){
+		return getwtmRepository().check();
 	}
 }

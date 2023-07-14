@@ -172,8 +172,8 @@
 					<span class="tools">
 						<span id="tool" th:each="tool : ${toolList}">
 							<label>
-								[[ ${tool.wtName} ]]<input th:field="${form.tools}" th:value="${tool.wtName + '(' + tool.welfareToolNo + ')'}"
-									type="checkbox"  th:checked="${form.tools == tool.wtName + '(' + tool.welfareToolNo + ')'}" />
+								[[ ${tool.wtName} ]]<input  th:field="${form.tools}" th:value="${tool.wtName + '(' + tool.welfareToolNo + ')'}"
+									type="checkbox" th:checked="${form.tools == tool.wtName + '(' + tool.welfareToolNo + ')'}" />
 							</label>
 						</span><br>
 				<label th:class="error" th:if="${#fields.hasErrors('tools')}" th:errors="${form.tools}"></label>
