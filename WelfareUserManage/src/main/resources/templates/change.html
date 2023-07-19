@@ -14,12 +14,12 @@
 			op.text = addText;
 			doc.appendChild(op);
 		}
-		function setOption2(doc,addValue){
+/*		function setOption2(doc,addValue){
 			var op = document.createElement("option");
 			op.value = addValue;
 			doc.appendChild(op);
-		}
-		
+		}*/
+			
 		const cityList = /*[[${cityList}]]*/
 		function setCity(select_region) {
 			city = document.getElementById("cityCode");
@@ -34,42 +34,76 @@
 		}
 		
 		const careMgrList = /*[[${careMgrList}]]*/
-		function setCareMgr(office){
+		function setCareMgr(office,careMgr){
 			var officeNo = office.value.substr(-7,6);
-			let careMgr = document.getElementById("careMgrList");
 			while(careMgr.firstChild){
 				careMgr.removeChild(careMgr.firstChild);
 			}
 			for(let i = 0;i<careMgrList.length;i++){
 				var addValue = careMgrList[i].cmName + '(' + careMgrList[i].careMgrId+')';
+				var addText = careMgrList[i].homeSerOfficeNo;
 				if(officeNo == careMgrList[i].homeSerOfficeNo){
-					setOption2(careMgr,addValue);
+					setOption(careMgr,addValue,addText);
 				}else if(officeNo == ''){
-					setOption2(careMgr,addValue);
+					setOption(careMgr,addValue,addText);
 				}
 			}
 		}
+		
+		function setOffice(careMgr,list,office){
+			let oList = document.getElementById("officeList");
+			for(let i =0;i<list.options.length;i++){
+				if(list.options[i].value == careMgr.value){
+					cmOfficeNo = list.options[i].text;
+					for(let j = 0;j < oList.options.length;j++){
+						if(oList.options[j].value.substr(-7,6) === cmOfficeNo){
+							office.value = oList.options[j].value;
+						}
+					}
+				}
+			}
+		}
+		
+		const userTool = /*[[ ${userTool} ]]*/
+		function toolChecked(tools){
+			var usertool = userTool
+			for(let i = 1 ; i <= tools.length;i++){
+				let tool = document.getElementById('tools'+i);
+				if(tool.value == usertool[0]){
+					tool.checked = true;
+					usertool.shift();
+				}
+				if(usertool.length == 0){
+					break;
+				}
+			}
+		}
+		
+		
 		window.addEventListener('DOMContentLoaded', function () {
+			
 			let select_region = document.querySelector("select[name=regionCode]");
-
 			select_region.addEventListener('change', function () {
 				setCity(select_region);
 			});
 			
-			var today = new Date();
-			this_year = today.getFullYear();
-			var START = 2014;
-			var doc = document.getElementById("moniY");
-			for (i = START; i <= this_year; i++) {
-<!--				setOption(doc,i,i + "年");-->
-			}
-
+			let cmList = document.getElementById("careMgrList");
 			let office = document.getElementById("officeNo");
+			let careMgr = document.getElementById("careMgr");
 			office.addEventListener('change',function(){
-				setCareMgr(office);
+				setCareMgr(office,cmList);
+			});			
+			careMgr.addEventListener('change',function(){
+				if(careMgr.value != ""){
+					setOffice(careMgr,cmList,office)					
+				}else{
+					setCareMgr(office,cmList,office);
+				}
 			});
+			
+			let tools = document.getElementsByClassName("tool");
+			toolChecked(tools)
 		});
-		
 	</script>
 	<title>register</title>
 </head>
@@ -96,11 +130,9 @@
 					<label th:class="error" th:if="${#fields.hasErrors('gender')}" th:errors="${form.gender}"></label>
 			<div class="flexS">	
 					<div class="nowrap"><label>氏名</label><input th:field="${form.uName}" type="text"></div>
-
 				<div class="birthday" id="vertical">
 					<div class="nowrap"><label>生年月日</label><input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d"
 						placeholder="yyyy-mm-dd"></div>
-
 				</div>
 				<div calss="gender">
 					<div class="nowrap"><label>性別</label><select th:field="${form.gender}">
@@ -121,7 +153,6 @@
 					<option th:each="city : ${cityList}" th:if="${city.regionCode == form.regionCode}" th:value="${city.cityCode}" th:text="${city.cName}" th:selected="${form.cityCode == city.cityCode}"></option>
 				</select><input th:field="${form.house}" type="text" placeholder="住所">
 			</div>
-
 			<div class="flexS">
 				<div class="flexV">
 						<label th:class="error" th:if="${#fields.hasErrors('careLevelNo')}" th:errors="${form.careLevelNo}"></label>
@@ -170,10 +201,10 @@
 				<div class="flexS">
 					<label>福祉用具検索</label>
 					<span class="tools">
-						<span id="tool" th:each="tool : ${toolList}">
+						<span class="tool" th:each="tool : ${toolList}">
 							<label>
-								[[ ${tool.wtName} ]]<input  th:field="${form.tools}" th:value="${tool.wtName + '(' + tool.welfareToolNo + ')'}"
-									type="checkbox" th:checked="${form.tools == tool.wtName + '(' + tool.welfareToolNo + ')'}" />
+								[[ ${tool.wtName} ]]
+								<input type="checkbox" th:field="${form.tools}" th:value="${tool.wtName+'('+tool.welfareToolNo+')'}" />
 							</label>
 						</span><br>
 				<label th:class="error" th:if="${#fields.hasErrors('tools')}" th:errors="${form.tools}"></label>
@@ -193,7 +224,7 @@
 				</datalist>
 				<label>ケアマネ</label><input th:field="${form.careMgr}" type="search" id="careMgr" list="careMgrList" >
 				<datalist th:field="${careMgrList}" id="careMgrList">
-					<option th:each="careMgr : ${careMgrList}" th:value="${careMgr.cmName + '(' + careMgr.careMgrId +')'}"></option>
+					<option th:each="careMgr : ${careMgrList}" th:value="${careMgr.cmName + '(' + careMgr.careMgrId +')'}" th:text="${careMgr.homeSerOfficeNo}"></option>
 				</datalist>
 			</div>
 			<div class="btn">
