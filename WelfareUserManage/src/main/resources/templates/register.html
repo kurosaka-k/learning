@@ -14,11 +14,6 @@
 			op.text = addText;
 			doc.appendChild(op);
 		}
-		function setOption2(doc,addValue){
-			var op = document.createElement("option");
-			op.value = addValue;
-			doc.appendChild(op);
-		}
 		
 		const cityList = /*[[${cityList}]]*/
 		function setCity(select_region) {
@@ -33,21 +28,36 @@
 		}
 		
 		const careMgrList = /*[[${careMgrList}]]*/
-		function setCareMgr(office){
+		function setCareMgr(office,careMgr){
 			var officeNo = office.value.substr(-7,6);
-			let careMgr = document.getElementById("careMgrList");
 			while(careMgr.firstChild){
 				careMgr.removeChild(careMgr.firstChild);
 			}
 			for(let i = 0;i<careMgrList.length;i++){
 				var addValue = careMgrList[i].cmName + '(' + careMgrList[i].careMgrId+')';
-				if(officeNo == careMgrList[i].homeSerOfficeNo){
-					setOption2(careMgr,addValue);
+				var addText = careMgrList[i].homeSerOfficeNo;
+				console.log(addText)
+				if(officeNo == addText){
+					setOption(careMgr,addValue,addText);
 				}else if(officeNo == ''){
-					setOption2(careMgr,addValue);
+					setOption(careMgr,addValue,addText);
 				}
 			}
 		}
+		function setOffice(careMgr,list,office){
+			let oList = document.getElementById("officeList");
+			for(let i =0;i<list.options.length;i++){
+				if(list.options[i].value == careMgr.value){
+					cmOfficeNo = list.options[i].text;
+					for(let j = 0;j < oList.options.length;j++){
+						if(oList.options[j].value.substr(-7,6) === cmOfficeNo){
+							office.value = oList.options[j].value;
+						}
+					}
+				}
+			}
+		}
+		
 		window.addEventListener('DOMContentLoaded', function () {
 			let select_region = document.querySelector("select[name=regionCode]");
 
@@ -64,9 +74,18 @@
 				setOption(doc,i,i + "年");
 			}
 
+			let cmList = document.getElementById("careMgrList");
 			let office = document.getElementById("officeNo");
+			let careMgr = document.getElementById("careMgr");
 			office.addEventListener('change',function(){
-				setCareMgr(office);
+				setCareMgr(office,cmList);
+			});			
+			careMgr.addEventListener('change',function(){
+				if(careMgr.value != ""){
+					setOffice(careMgr,cmList,office)					
+				}else{
+					setCareMgr(office,cmList,office);
+				}
 			});
 		});
 		
@@ -77,12 +96,10 @@
 <body>
 	<header>
 		<div class="header">
-			<div>
-				<h2><span class="heading">新規登録画面</span></h2>
-			</div>
-			<form th:action="@{/search}">
-				<button>検索</button>
-			</form>
+			<div><h2><span class="heading">新規登録画面</span></h2></div>
+			<div><form th:action="@{/search}">
+				<h2><button>検索</button></h2>
+			</form></div>
 		</div>
 	</header>
 	<hr>
@@ -93,24 +110,22 @@
 					<label th:class="error" th:if="${#fields.hasErrors('birthDate')}" th:errors="${form.birthDate}"></label>
 					<label th:class="error" th:if="${#fields.hasErrors('gender')}" th:errors="${form.gender}"></label>
 			<div class="flexS">							
-					<div class="nowrap"><label>氏名</label><input th:field="${form.uName}" type="text"></div>
-
+				<div class="name"><label>氏名</label><input th:field="${form.uName}" type="text"></div>
 				<div class="birthday" id="vertical">
-					<div class="nowrap"><label>生年月日</label><input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d"
-						placeholder="yyyy-mm-dd"></div>
-
+					<label>生年月日</label>
+					<input th:field="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d" placeholder="yyyy-mm-dd">
 				</div>
-				<div calss="gender">
-					<div class="nowrap"><label>性別</label><select th:field="${form.gender}">
+				<div class="gender">
+					<label>性別</label><select th:field="${form.gender}">
 						<option value=""></option>
 						<option value="1">男</option>
 						<option value="2">女</option>
-					</select></div>
+					</select>
 				</div>
 			</div>
 				<label th:class="error" th:if="${#fields.hasErrors('cityCode')}" th:errors="${form.cityCode}"></label>
 				<label th:class="error" th:if="${#fields.hasErrors('house')}" th:errors="${form.house}"></label>
-			<div class="flexS">
+			<div class="home">
 				<label>住所</label><select name="regionCode">
 					<option value="">都道府県を選択</option>
 					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}">
@@ -122,7 +137,7 @@
 			<div class="flexS">
 				<div class="flexV">
 						<label th:class="error" th:if="${#fields.hasErrors('careLevelNo')}" th:errors="${form.careLevelNo}"></label>
-					<div class="flexS" id="carelevel">
+					<div class="carelevel" id="carelevel">
 						<label>要介護度</label><select th:field="${form.careLevelNo}">
 							<option value="">介護度の選択</option>
 							<option th:value="01">要支援1</option>
@@ -135,7 +150,7 @@
 						</select>
 					</div>
 						<label th:class="error" th:if="${#fields.hasErrors('chargeId')}" th:errors="${form.chargeId}"></label> 
-					<div class="flexS" id="charge">
+					<div class="charge" id="charge">
 						<label>担当</label><input th:field="${form.chargeId}" type="search" list="chargeList">
 						<datalist th:field="${chargeList}" id="chargeList">
 							<option th:each="charge : ${chargeList}"  th:value="${charge.cName+'('+charge.chargeId+')'}"></option>
@@ -143,7 +158,7 @@
 					</div>
 						<label th:class="error" th:if="${#fields.hasErrors('moniY')}" th:errors="${form.moniY}"></label>
 						<label th:class="error" th:if="${#fields.hasErrors('moniM')}" th:errors="${form.moniM}"></label>
-					<div class="flexS" id="moni">
+					<div class="moni" id="moni">
 						<label>モニタリン</label><select th:field="${form.moniY}">
 							<option value=""></option>
 						</select><select th:field="${form.moniM}">
@@ -163,7 +178,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="flexS">
+
 					<label>福祉用具検索</label>
 					<span class="tools">
 						<span id="tool" th:each="tool : ${toolList}">
@@ -174,23 +189,29 @@
 						</span><br>
 				<label th:class="error" th:if="${#fields.hasErrors('tools')}" th:errors="${form.tools}"></label>
 					</span>
-				</div>
+				
 			</div>
 				<label th:class="error" th:if="${#fields.hasErrors('adl')}" th:errors="${form.adl}"></label>
-			<div class="adl" id="flexV">
+			<div class="adl">
 				<label>ADL(日常生活動作）</label><textarea th:field="${form.adl}"></textarea>
 			</div>
 			<label th:class="error" th:if="${#fields.hasErrors('homeSerOffice')}" th:errors="${form.homeSerOffice}"></label>
 			<label th:class="error" th:if="${#fields.hasErrors('careMgrId')}" th:errors="${form.careMgrId}"></label>
 			<div class="flexS">
+				<div class="office">
+					
 				<label>居宅サービス事務所</label><input th:field="${form.homeSerOffice}" type="search" id="officeNo" list="officeList">
 				<datalist th:field="${officeList}" id="officeList">
 					<option th:each="office : ${officeList}" th:value="${office.oName + '(' + office.homeSerOfficeNo +')'}"></option>
 				</datalist>
-				<label>ケアマネ</label><input th:field="${form.careMgrId}" type="search" id="careMgr" list="careMgrList">
+				</div>
+				<div class="careMgr">
+					
+				<label>ケアマネージャー</label><input th:field="${form.careMgrId}" type="search" id="careMgr" list="careMgrList">
 				<datalist th:field="${careMgrList}" id="careMgrList">
-					<option th:each="careMgr : ${careMgrList}" th:value="${careMgr.cmName + '(' + careMgr.careMgrId +')'}"></option>
+					<option th:each="careMgr : ${careMgrList}" th:text="${careMgr.homeSerOfficeNo}" th:value="${careMgr.cmName + '(' + careMgr.careMgrId +')'}"></option>
 				</datalist>
+				</div>
 			</div>
 			<div class="btn">
 				<button>確認</button>

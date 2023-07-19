@@ -2,21 +2,21 @@
 body{
 	margin: 0px;
 	padding: 0px;
-	min-width: 700px;
 }
 .header{
 	display: flex;
-	margin: 10px;
+/*	margin: 10px;*/
 	justify-content: space-between;
+	min-width: 250px;
 }
 .header div{
 	width:auto;
-	padding:10px;
+/*	padding:10px;*/
 }
 .header button{
 	min-width: 100px;
 	height: 30px;
-	margin-top: 50px;
+/*	margin-top: 50px;*/
 /*	background-color: aqua;*/
 }
 .heading{
@@ -34,72 +34,104 @@ label{
 /*	margin-left: 5px;*/
 }
 input{
-	
 	margin-right: 10px;
 }
-.search-box{
-	width: fit-content;
-	margin: 10px;
-	border: solid 1px orange;
-	padding: 10px;
+option{
+	text-align: center;
 }
-.search{
-	justify-content: start;
+/*検索画面*/
+.name{
 	display: flex;
-	padding-bottom: 5px;
 }
-
-.search-name input{
-	min-width:80px
+.name #userId{
+	width: 30%;
 }
-
-.search-home{
+.name label{
+	width: 70px;
+}
+.name input{
+	min-width:80px;
+	width: 70%;
+	margin-right: 0px;
+}
+.age{
+	display: flex;
+	justify-content: center;
+/*	margin-right: 10px;*/
+}
+.age *{
+	width: 30%;
+	min-width: 40px;
+}
+.gender{
+	display: flex;
+	justify-content: end;
+}
+.gender *{
+	width: 100%;
+/*	width: 100%;*/
+}
+.home{
 	display: flex;
 	justify-content: start;
 	padding-bottom: 5px;
+	margin-bottom: 10px;
 }
-.search-home *{ 
-	min-width: 120px;
-	height: 50px;
-}
-.search-home label{
-	line-height: 50px;
-	
-}
-.search-home input{
+.home input{
+	width: 100%;
 	min-width: 200px;
 	height: 45px;
 }
-.search-item{
+.home select{
+	min-width: 120px;
+	height: 50px;
+}
+.home label{
+	line-height: 50px;
+	min-width: 70px;
+}
+.item{
 /*	border: solid 1px black;*/
 	margin-right: 10px;
 }
-.search-item input{
+.item input{
 	width: 100px;
 }
-.search-carelevel{
+.carelevel{
 	display: flex;
 }
-/*.search-charge{*/
-/*	margin-top: 10px;*/
-/*	margin-bottom: 10px;*/
-/*}*/
-/*.search-charge input{*/
-/*	height: 50px;*/
-/*	width:200px;*/
+.carelevel label{
+	min-width: 70px;
+}
+.charge{
+	display: flex;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.charge input{
+	height: 50px;
+	width: 100%;
+	min-width:200px;
+}
+.charge label{
+	line-height: 50px;
+	min-width: 70px;
+}
+.moni{
+	display: flex;
 	
-/*}*/
-.search-moni{
-	display: flex;
 }
-.search-moni select{
-	width: 150px;
+.moni label{
+	height: 25px;
+	overflow:hidden;
 }
-.search-tools{
+.moni select{
+	width: 130px;
+}
+.tools{
 	border: solid 1px greenyellow;
-	
 }
-.search-tools label{
+.tools label{
 	border: none;
 	padding: 0px;
 }
@@ -122,40 +154,6 @@ table th,td{
 	border-right: solid 1px black;
 	border-bottom: solid 1px black;
 }
-
-/*試し?*/
-.top-flexV{
-	border: solid 1px orange;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 10px;
-}
-.flexV {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-.flexS{
-	display: flex;
-	margin-bottom: 10px;
-}
-.flexV div{
-	margin-bottom: 10px;
-}
-#flexV{
-	display: flex;
-	margin-bottom: 10px;
-}
-.nowrap{
-	white-space: nowrap;
-}
-#moni label{
-	width: 80px;
-}
-#moni select{
-	min-width: 120px;
-}
 .tools{
 	border: solid 1px greenyellow;
 }
@@ -166,19 +164,110 @@ table th,td{
 .tools span{
 	display: inline-block;
 }
-.adl {
-	align-items: center;
-}
 
+/*登録画面*/
+.home select{
+	width: 150px;
+}
+.home input{
+	margin-right: 0px;
+}
+.birthday{
+	display: flex;
+	justify-content: center;
+}
+.birthday label{
+	width: 80px;
+}
+.adl {
+	display: flex;
+	align-items: center;
+	margin-bottom: 10px;
+}
+.adl label{
+	height: 100px;
+	min-width: 90px;
+}
 .adl textarea{
 	min-height: 100px;
-	width: 90%;
+	width: 100%;
 }
-/*エラーメッセージ*/
-#vertical{
+.office{
+	display: flex;
+}
+.office label{
+	height: 25px;
+	width: 200px;
+	overflow: hidden;
+}
+.office input{
+	width: 100%;
+}
+.careMgr{
+	display: flex;
+}
+.careMgr label{
+	height: 25px;
+	width: 200px;
+	overflow: hidden;
+}
+.careMgr input{
+	width: 100%;
+	margin-right: 0px;
+}
+/*確認画面*/
+span{
+	border: solid 1px greenyellow;
+}
+.birthday span{
+	width: 100px;
+}
+.home span{
+	width: 100%;
+}
+.tools span{
+	border: none;
+}
+.adl span{
+	width: 100%;
+	height: 100px;
+}
+.careMgr span{
+	width: 100%;
+}
+/*更新画面*/
+/*共通*/
+.top-flexV{
+	border: solid 1px orange;
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	margin: 10px auto;
+	padding: 10px;
+	min-width: 700px;
+	max-width:900px;
 }
+.flexV {
+	display: flex;
+	flex-direction: column;
+	padding-right: 10px;
+/*	justify-content: center;*/
+}
+.flexS{
+	display: flex;
+	margin-bottom: 10px;
+}
+.flexS div{
+	width: 100%;
+}
+.flexS .gender{
+	width: 30%;
+}
+/*エラーメッセージ*/
+/*#vertical{*/
+/*	display: flex;*/
+/*	flex-direction: column;*/
+/*}*/
 .error {
 	border: none;
 	color: red;
