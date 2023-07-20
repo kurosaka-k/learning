@@ -60,40 +60,36 @@ function setCity(select_region){
 }
 
 </script>
-<title>earch</title>
+<title>search</title>
 </head>
 <body>
 	<header>
 		<div class="header">
 			<div><h2><span class="heading">検索画面</span></h2></div>
-			<form th:action="@{/register}">				
-			<button>新規登録</button>
-			</form>
+			<div><form th:action="@{/register}">
+				<h2><button>新規登録</button></h2>
+			</form></div>
 		</div>
 	</header>
 	<hr>
-	<div class="top-flexV">
-		<form method="post" th:action="@{/search/searching}" th:object="${form}">
+	<div class="box">
+		<form class="top-flexV" method="post" th:action="@{/search/searching}" th:object="${form}">
 			
 		<div class="flexS">
-			<div class="search-name">		
+			<div class="name">		
 				<input th:field="${form.userId}" type="text" placeholder="IDコード">
 				<label>氏名</label><input th:field="${form.uName}" type="text">
 			</div>
-			<div class="search-age">
+			<div class="age">
 				<label>年齢</label><select th:field="${form.ageFrom}">
 					<option value=""></option>
-<!--					<option value="40">40</option>-->
-<!--					<option th:each="age : ${ageform}" th:field="${age.value}">41</option>-->
 				</select>
 				~
 				<select th:field="${form.ageTo}">
 					<option value=""></option>
-<!--					<option value="40">40</option>-->
-<!--					<option th:each="age : ${ageform}" th:field="${age.value}">41</option>-->
 				</select>
 			</div>
-			<div calss="search-gender">
+			<div class="gender">
 				<label>性別</label><select th:field="${form.gender}">
 					<option value=""></option>
 					<option value="1">男</option>
@@ -101,8 +97,8 @@ function setCity(select_region){
 				</select>
 			</div>
 		</div>
-		<div class="search">
-			<div class="search-home">
+		<div class="flexS">
+			<div class="home">
 				<label>住所</label><select th:field="${form.regionCode}">
 					<option value="">都道府県を選択</option>
 					<option th:each="region : ${regionList}" th:value="${region.regionCode}" th:text="${region.rName}">都道府県</option>
@@ -112,7 +108,7 @@ function setCity(select_region){
 		</div>
 		<div class="flexS">
 			<div class="flexV">
-				<div class="search-carelevel">
+				<div class="carelevel">
 					<label>要介護度</label><select th:field="${form.careLevelFrom}">
 						<option value="">介護度の選択</option>
 						<option th:value="01">要支援1</option>
@@ -120,7 +116,7 @@ function setCity(select_region){
 						<option th:value="03">要介護1</option>
 						<option th:value="04">要介護2</option>
 					</select>
-					~
+					　~　
 					<select th:field="${form.careLevelTo}">
 						<option value="">介護度の選択</option>					
 						<option th:value="05">要介護3</option>
@@ -129,10 +125,10 @@ function setCity(select_region){
 
 					</select>
 				</div>
-				<div class="search-charge">
+				<div class="charge">
 					<label>担当</label><input th:field="${form.cName}" type="text">
 				</div>
-				<div class="search-moni">
+				<div class="moni">
 					<label>モニタリング月</label><select th:field="${form.moniY}">
 						<option value=""></option>
 					</select><select th:field="${form.moniM}">
@@ -182,8 +178,8 @@ function setCity(select_region){
 				</tr>
 			</thead>
 			<tbody>
-				<span th:each="result : ${resultList}">
-					<tr>	
+				
+					<tr th:each="result : ${resultList}">	
 						<td>
 							<a th:href="@{'/detailData/' + ${result.userId}}">[[ ${result.uName} ]]</a>
 						</td>							
@@ -194,7 +190,7 @@ function setCity(select_region){
 						<td th:text="${result.cName}">松下　花子</td>
 						<td th:text="${result.moniMonths}">2017/12</td>
 					</tr>
-				</span>
+				
 			</tbody>
 		</table>
 	</div>

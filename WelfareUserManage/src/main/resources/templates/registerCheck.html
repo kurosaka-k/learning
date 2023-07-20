@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/add.css}">
 	<title>registerCheck</title>
 </head>
 
@@ -21,18 +22,18 @@
 		<form method="post" th:action="@{/register/create}" th:object="${form}">
 
 			<div class="flexS">
-				<div class="search-name">
+				<div class="name">
 					<input hidden th:field="${form.uName}">
 					<label>氏名</label><span th:text="${form.uName}"></span>
 				</div>
-				<div class="search-birthday">
+				<div class="birthday">
 					<input hidden th:field="${form.birthDate}">
 					<label>生年月日</label><span th:text="${form.birthDate}" type="text" pattern="\d\d\d\d-\d\d-\d\d" placeholder="yyyy-mm-dd">
 				</div>
 				<div class="age">
 					<label>年齢</label><span id="age" th:text="${form.age}"></span>
 				</div>
-				<div calss="search-gender">
+				<div class="gender">
 					<input hidden th:field="${form.gender}">
 					<label>性別</label><span th:switch="${form.gender}">
 						<span th:case=1>男</span>
@@ -41,14 +42,14 @@
 					
 				</div>
 			</div>
-				<div class="search-home" th:field="${regioncityList}">
+				<div class="home" th:field="${regioncityList}">
 					<input hidden th:field="${form.cityCode}">
 					<input hidden th:field="${form.house}">
 					<label>住所</label><span th:each="regioncity : ${regioncityList}" th:if="${regioncity.cityCode == form.cityCode}" th:text="${regioncity.rName + regioncity.cName + form.house}"></span>
 				</div>
 			<div class="flexS">
 				<div class="flexV">
-					<div class="search-carelevel">
+					<div class="carelevel">
 						<input hidden th:field="${form.careLevelNo}">
 						<label>要介護度</label><span th:switch="${form.careLevelNo}">
 							<span th:case=1>要支援1</span>
@@ -60,17 +61,17 @@
 							<span th:case=7>要介護5</span>
 						</span>
 					</div>
-					<div class="search-charge">
+					<div class="charge">
 						<input hidden th:field="${form.chargeId}">
 						<label>担当</label><span th:text="${form.cName}"></span>
 					</div>
-					<div class="search-moni">
+					<div class="moni">
 						<input hidden th:field="${form.moni}">
 						<label>モニタリング月</label><span th:text="${form.moni}"></span>
 					</div>
 				</div>
 				<label>福祉用具検索</label>
-				<div class="search-tools">
+				<div class="tools">
 					<input hidden th:field="${form.toolsCode}">
 					<span th:text="${form.tools}"></span>
 				</div>
@@ -79,11 +80,15 @@
 				<input hidden th:field="${form.adl}">
 				<label>ADL(日常生活動作）</label><span th:text="${form.adl}" type="text"></span>
 			</div>
-			<div class="">
-				<input hidden th:field="${form.homeSerOfficeNo}">
-				<label>居宅サービス事務所</label><span th:text="${form.oName}"></span>
-				<input hidden th:field="${form.careMgrId}">
-				<label>ケアマネ</label><span th:text="${form.cmName}" type="text"></span>
+			<div class="flexS">
+				<div class="office">
+					<input hidden th:field="${form.homeSerOfficeNo}">
+					<label>居宅サービス事務所</label><span th:text="${form.oName}"></span>
+				</div>
+				<div class="careMgr">					
+					<input hidden th:field="${form.careMgrId}">
+					<label>ケアマネ</label><span th:text="${form.cmName}" type="text"></span>
+				</div>
 			</div>
 			<div class="btn">
 			この内容で間違いありませんか？良ければ登録ボタンを押してください。

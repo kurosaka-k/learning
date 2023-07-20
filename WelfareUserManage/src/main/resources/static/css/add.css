@@ -1,0 +1,72 @@
+/*@charset "UTF-8";*/
+/*個人データ詳細画面*/
+span{
+	border: solid 1px greenyellow;
+	width: 100%;
+}
+.name label{
+	min-width: 70px;
+}
+.name span{
+	white-space: nowrap;
+	margin-right: 5px;
+	text-align: center;
+}
+.userId{
+	display: flex;
+	justify-content: center;
+	margin-right: 5px;
+}
+.userId label{
+	min-width: 80px;
+}
+.birthday span{
+	width: 100px;
+}
+.age span{
+	width: 30px;
+	text-align: center;
+}
+.gender span{
+	width: 30px;
+	text-align: center;
+}
+.home span{
+	width: 100%;
+	text-align: center;
+	line-height: 50px;
+}
+.carelevel span{
+	width: 100%;
+	text-align: center;
+}
+.charge span{
+	text-align: center;
+	line-height: 50px;
+}
+.moni label{
+	min-width: 70px;
+}
+.moni span{
+	text-align: center;
+}
+.tools span{
+	border: none;
+}
+.adl span{
+	width: 100%;
+	height: 100px;
+}
+.office span{
+	width: 100%;
+	margin-right: 10px;
+}
+.careMgr span{
+	width: 100%;
+}
+.flexS .userId{
+	width: 80%;
+}
+.flexS .careMgr{
+	width: 50%;
+}

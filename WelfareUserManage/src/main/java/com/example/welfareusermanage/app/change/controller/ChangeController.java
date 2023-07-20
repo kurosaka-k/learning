@@ -1,5 +1,7 @@
 package com.example.welfareusermanage.app.change.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -14,7 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.welfareusermanage.app.change.entity.ChangeForm;
-import com.example.welfareusermanage.app.change.entity.ToolsChecked;
 import com.example.welfareusermanage.app.change.entity.UpdateData;
 import com.example.welfareusermanage.app.change.service.ChangeService;
 import com.example.welfareusermanage.app.search.controller.SearchController;
@@ -52,16 +53,11 @@ public class ChangeController {
 	public String init(@PathVariable String userId,Model model) {
 		logger.info("更新画面　初期表示　開始");
 		
-		List<ToolsChecked> toolsList = welfaretoolservice.readchecked();
 		ChangeForm changeForm = changeservice.read(userId);
 		String[] toolArry = changeForm.getTools().split(",");
-		for(int i = 0; i < toolsList.size() ; i++) {
-			
-			for(String tools : toolArry) {
-				logger.info(""+tools);
-				
-			}
-		}
+		List<String> userTool = new ArrayList<String>(Arrays.asList(toolArry));
+
+		model.addAttribute("userTool",userTool);
 		
 		model.addAttribute("yearList",changeservice.moniForm());
 		
@@ -69,7 +65,7 @@ public class ChangeController {
 		
 		model.addAttribute("cityList",cityservice.readAll());
 				
-		model.addAttribute("toolList",welfaretoolservice.readAll());
+		model.addAttribute("toolList",welfaretoolservice.readAll());		
 		
 		model.addAttribute("chargeList",chargeservice.readAll());
 		
@@ -77,7 +73,7 @@ public class ChangeController {
 		
 		model.addAttribute("careMgrList", caremgrservice.readAll());
 		
-		model.addAttribute("form",changeservice.read(userId));
+		model.addAttribute("form",changeForm);
 		
 		logger.info("更新画面　初期表示　終了"+changeservice.read(userId));
 		return "change";
@@ -86,7 +82,7 @@ public class ChangeController {
 	@RequestMapping("/changeCheck")
 	public String check(@Validated @ModelAttribute("form")ChangeForm form,BindingResult result, Model model) {
 		logger.info("更新画面　入力チェック　開始");
-		
+
 		model.addAttribute("yearList",changeservice.moniForm());
 		
 		model.addAttribute("regionList",regionservice.readAll());
@@ -105,7 +101,7 @@ public class ChangeController {
 			return "change";
 		}
 		
-		logger.info("更新画面　入力チェック　終了");
+		logger.info("更新画面　入力チェック　終了"+form);
 		
 		logger.info("更新項目確認画面　初期表示　開始");
 		
