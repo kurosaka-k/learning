@@ -5,6 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" th:href="@{/css/base.css}">
+	<link rel="stylesheet" th:href="@{/css/add.css}">
 	<title>DetailData</title>
 </head>
 
@@ -23,8 +24,8 @@
 		</div>
 	</header>
 	<hr>
-	<div class="top-flexV">
-		<form method="post" th:action="@{/register/create}" th:object="${form}">
+	<div class="box">
+		<form class="top-flexV" method="post" th:action="@{/register/create}" th:object="${form}">
 
 			<div class="flexS">
 				<div class="name">

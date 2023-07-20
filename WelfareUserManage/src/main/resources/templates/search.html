@@ -60,7 +60,7 @@ function setCity(select_region){
 }
 
 </script>
-<title>earch</title>
+<title>search</title>
 </head>
 <body>
 	<header>
@@ -72,8 +72,8 @@ function setCity(select_region){
 		</div>
 	</header>
 	<hr>
-	<div class="top-flexV">
-		<form method="post" th:action="@{/search/searching}" th:object="${form}">
+	<div class="box">
+		<form class="top-flexV" method="post" th:action="@{/search/searching}" th:object="${form}">
 			
 		<div class="flexS">
 			<div class="name">		
@@ -178,8 +178,8 @@ function setCity(select_region){
 				</tr>
 			</thead>
 			<tbody>
-				<span th:each="result : ${resultList}">
-					<tr>	
+				
+					<tr th:each="result : ${resultList}">	
 						<td>
 							<a th:href="@{'/detailData/' + ${result.userId}}">[[ ${result.uName} ]]</a>
 						</td>							
@@ -190,7 +190,7 @@ function setCity(select_region){
 						<td th:text="${result.cName}">松下　花子</td>
 						<td th:text="${result.moniMonths}">2017/12</td>
 					</tr>
-				</span>
+				
 			</tbody>
 		</table>
 	</div>
